@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-// Use production API if deployed, otherwise dev localhost
-const BASE = window.location.hostname === 'localhost' 
+// Use relative path in production (same origin), absolute in local dev
+const BASE = window.location.hostname === 'localhost'
   ? 'http://localhost:8000/api'
-  : 'https://verispectai.com/api'
+  : '/api'
 
 export const getMetrics = () => axios.get(`${BASE}/metrics`).then(r => r.data)
 export const getLogs = () => axios.get(`${BASE}/logs`).then(r => r.data)

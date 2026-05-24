@@ -1,11 +1,13 @@
 import os
+import pathlib
 from fastapi import FastAPI, Request, HTTPException, Depends
 from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.background import BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from forwarder import forward_to_openai, stream_openai
-from database import init_db, log_call
+from database import init_db, log_call, database
 from canary import maybe_run_canary
 from api import router
 import time
@@ -37,6 +39,11 @@ app.include_router(router, dependencies=[Depends(verify_api_key)])
 @app.on_event("startup")
 async def startup():
     await init_db()
+    await database.connect()
+
+@app.on_event("shutdown")
+async def shutdown():
+    await database.disconnect()
 
 @app.get("/health")
 def health():
@@ -102,3 +109,8 @@ async def intercept(request: Request, background_tasks: BackgroundTasks):
     background_tasks.add_task(maybe_run_canary, body, auth)
     
     return JSONResponse(result)
+
+# Serve React dashboard static files (must be AFTER all API routes)
+dashboard_dist = pathlib.Path(__file__).parent / "dashboard" / "dist"
+if dashboard_dist.exists():
+    app.mount("/", StaticFiles(directory=str(dashboard_dist), html=True), name="dashboard")

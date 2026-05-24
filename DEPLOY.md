@@ -1,113 +1,143 @@
 # Railway Deployment Guide — Verispect
 
-## Step 1: Prepare GitHub Repository
+## Architecture
 
-1. Initialize git (if not already done):
-   ```powershell
-   git init
-   git add .
-   git commit -m "Initial Verispect commit — streaming support + dashboard"
-   ```
+Verispect runs as a **single Railway service**. The FastAPI backend serves:
+- `/v1/chat/completions` — LLM middleware proxy
+- `/api/*` — Dashboard API endpoints
+- `/` — React dashboard (static files from `dashboard/dist/`)
 
-2. Push to GitHub:
-   ```powershell
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/verispect.git
-   git push -u origin main
-   ```
+No separate Vercel deployment needed.
 
-## Step 2: Create Railway Account & Project
+---
 
-1. Go to https://railway.app
-2. Sign up (GitHub auth recommended)
-3. Create a new project → "Deploy from GitHub repo"
-4. Select your verispect repository
-5. Authorize Railway to access your GitHub
+## Step 1: Push Code to GitHub
 
-## Step 3: Configure Environment Variables in Railway
-
-Once the project is created in Railway, go to **Variables** tab and add:
-
-```
-OPENAI_API_KEY=sk-proj-xxxx...  (your actual OpenAI key)
-VERISPECT_API_KEY=your-secret-key-here  (optional, for dashboard auth)
-DATABASE_URL=postgresql://...  (Railway will auto-populate this after Postgres is added)
-```
-
-## Step 4: Add PostgreSQL Database to Railway
-
-1. In your Railway project, click **+ New**
-2. Select **Add Database → PostgreSQL**
-3. Railway will auto-generate a `DATABASE_URL` environment variable
-4. This replaces SQLite for production
-
-## Step 5: Deploy the Application
-
-Railway will automatically:
-1. Detect `Procfile`
-2. Run `pip install -r requirements.txt`
-3. Start the server with the command in `Procfile`
-4. Expose your app at a Railway-generated URL (e.g., `verispect-prod.up.railway.app`)
-
-## Step 6: Point Custom Domain
-
-1. In Railway project settings, go to **Domains**
-2. Add custom domain: `verispectai.com`
-3. Follow Railway's DNS instructions to point your domain registrar to Railway's nameservers
-4. Within 10-30 minutes, your app will be live at `https://verispectai.com`
-
-## Step 7: Verify Deployment
-
-Test endpoints:
+Already done. Repo: `github.com/AjayNeeraj/verispect`
 
 ```powershell
+git add -A
+git commit -m "Production-ready: add db lifecycle, static serving, Railway build"
+git push origin main
+```
+
+## Step 2: Create Railway Project
+
+1. Go to [railway.app](https://railway.app)
+2. Sign in with GitHub
+3. **New Project** → **Deploy from GitHub Repo**
+4. Select `AjayNeeraj/verispect`
+5. Railway detects `railway.json` and starts building automatically
+
+## Step 3: Add PostgreSQL Database
+
+1. In your Railway project, click **+ New**
+2. Select **Database → PostgreSQL**
+3. Railway auto-generates `DATABASE_URL` and links it to your service
+4. Verify: click your service → Variables → `DATABASE_URL` should be present
+
+## Step 4: Set Environment Variables
+
+In Railway → your service → **Variables** tab:
+
+| Variable | Value |
+|---|---|
+| `OPENAI_API_KEY` | Your actual OpenAI API key |
+| `VERISPECT_API_KEY` | *(optional — leave blank for no dashboard auth)* |
+
+> `PORT` and `DATABASE_URL` are auto-set by Railway — don't touch them.
+
+## Step 5: Deploy
+
+Railway deploys automatically on:
+- Every push to `main` branch
+- Every environment variable change
+
+The build command (from `railway.json`) will:
+1. `pip install -r requirements.txt` — Python deps
+2. `cd dashboard && npm install && npm run build` — React build
+
+Watch **Deployments** tab for build logs.
+
+## Step 6: Get Railway URL
+
+1. Service → **Settings** → **Networking**
+2. Click **Generate Domain** → get a URL like `verispect-production.up.railway.app`
+3. Test: `https://verispect-production.up.railway.app/health` → `{"status": "alive"}`
+
+## Step 7: Add Custom Domain — verispectai.com
+
+1. Service → **Settings** → **Networking** → **Custom Domain**
+2. Click **Add Custom Domain** → enter `verispectai.com`
+3. Railway shows a CNAME record value
+
+## Step 8: Configure DNS
+
+At your domain registrar, add:
+
+| Type | Host | Value | TTL |
+|---|---|---|---|
+| **CNAME** | `@` (root) | Railway's CNAME value | 300 |
+| **CNAME** | `www` | `verispectai.com` | 300 |
+
+> **Note:** If your registrar doesn't support root CNAME, use Cloudflare (free) for CNAME flattening.
+
+Railway provides **automatic HTTPS/SSL** — no extra setup.
+
+## Step 9: Verify
+
+```powershell
+# DNS propagation (wait 5-30 min)
+nslookup verispectai.com
+
 # Health check
 curl https://verispectai.com/health
 
-# Metrics endpoint
+# API
 curl https://verispectai.com/api/metrics
+
+# Dashboard — open in browser
+start https://verispectai.com
 ```
 
-## Step 8: Deploy Frontend to Vercel (Optional but Recommended)
+## Step 10: Seed Production Database
 
-The React dashboard should be deployed separately to Vercel for speed:
+Run calibration against the live server:
 
-1. Go to https://vercel.com
-2. Sign up with GitHub
-3. Import your verispect repository
-4. Configure build:
-   - Root: `dashboard`
-   - Build command: `npm run build`
-   - Output: `dist`
-5. Add environment variable:
-   - `VITE_API_URL=https://verispectai.com/api` (optional if using smart detection in api.js)
-6. Deploy
+```powershell
+# Set DATABASE_URL to your Railway Postgres connection string locally
+$env:DATABASE_URL = "postgresql://..."
+python calibrate.py
+```
 
-Your dashboard will then live at `verispect.vercel.app` or a custom domain.
+Or send test calls through the middleware:
+```python
+from openai import OpenAI
+client = OpenAI(api_key="sk-...", base_url="https://verispectai.com/v1")
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[{"role": "user", "content": "Hello"}]
+)
+print(response)
+```
 
-## Notes
-
-- Railway handles HTTPS automatically with free SSL
-- Database backups are automatic on Railway Postgres
-- Logs are viewable in Railway dashboard (Deployments tab)
-- Environment variables are encrypted at rest
-- The `DATABASE_URL` format will be PostgreSQL, so the app already handles both SQLite (dev) and Postgres (prod) via the `databases` library
+---
 
 ## Troubleshooting
 
-**App won't start:**
-- Check Railway logs: Deployments → View Logs
-- Ensure all dependencies in `requirements.txt` are correct
-- Verify `Procfile` syntax
+**Build fails:**
+- Check Railway build logs (Deployments → View Logs)
+- Ensure Node.js is available (Railway's Nixpacks detects `package.json`)
 
 **Database errors:**
-- Ensure `DATABASE_URL` environment variable is set
-- Railway Postgres is accessible from the app by default
+- Verify `DATABASE_URL` is set in Variables
+- The `databases` library auto-detects PostgreSQL from the URL prefix
 
 **CORS errors:**
-- Already configured in `main.py` to allow `https://verispectai.com`
-- If using Vercel for frontend, also add that origin to CORS in `main.py`
+- Already configured for `https://verispectai.com` and `https://www.verispectai.com`
+- Not needed in production (same origin) but kept for API consumers
 
 **Domain not resolving:**
-- DNS propagation takes 10-30 min. Check Railway's DNS records in domain settings.
-- Use `nslookup verispectai.com` to verify.
+- DNS propagation: 5-30 min
+- Verify: `nslookup verispectai.com`
+- Check Railway domain settings for green checkmark
