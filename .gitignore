@@ -8,6 +8,7 @@ verispect.db
 *.db
 
 # Python
+.venv/
 __pycache__/
 *.py[cod]
 *$py.class
@@ -42,7 +43,6 @@ wheels/
 # Node/Frontend
 node_modules/
 dashboard/node_modules/
-dashboard/dist/
 .env
 
 # OS
