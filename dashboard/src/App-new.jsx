@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getMetrics, getLogs, getDriftEvents, getDriftTimeline, getComplianceSummary, downloadReport } from './api'
+import { getMetrics, getLogs, getDriftEvents, getDriftTimeline, getComplianceSummary } from './api'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, BarChart, Bar, Cell } from 'recharts'
 import './index.css'
 
@@ -139,29 +139,9 @@ export default function App() {
         <div className="app-header-logo">
           <span>⚡</span> Verispect
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div className="app-header-status">
-            <div className="status-dot"></div>
-            Live Monitoring
-          </div>
-          <button
-            onClick={downloadReport}
-            style={{
-              background: 'linear-gradient(135deg, #7c6eff 0%, #a78bfa 100%)',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '8px 16px',
-              fontSize: '13px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-            }}
-          >
-            📄 Download Report
-          </button>
+        <div className="app-header-status">
+          <div className="status-dot"></div>
+          Live Monitoring
         </div>
       </div>
 

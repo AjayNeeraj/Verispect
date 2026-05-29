@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from forwarder import forward_to_openai, stream_openai
 from database import init_db, log_call
 from canary import maybe_run_canary
-from api import router
+from api import router, sdk_router
 import time
 
 load_dotenv()
@@ -38,7 +38,8 @@ async def verify_api_key(request: Request):
     if key != VERISPECT_API_KEY:
         raise HTTPException(status_code=401, detail="Invalid API key")
 
-app.include_router(router, dependencies=[Depends(verify_api_key)])
+app.include_router(router, dependencies=[Depends(verify_api_key)])   # Dashboard — protected
+app.include_router(sdk_router)                                          # SDK endpoints — own auth
 
 # Serve built React frontend — only if the dist folder exists (production)
 DIST_DIR = os.path.join(os.path.dirname(__file__), "dashboard", "dist")

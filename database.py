@@ -37,6 +37,22 @@ baselines_table = sqlalchemy.Table(
     sqlalchemy.Column("created_at", sqlalchemy.DateTime, server_default=sqlalchemy.func.now()),
 )
 
+# Server-side registry of golden probes.
+# Stores ONLY: golden_id, client_id, prompt_hash, model, baseline_embedding (vector).
+# Raw prompt text is NEVER stored here — it lives in the client's local SQLite.
+golden_probe_registry = sqlalchemy.Table(
+    "golden_probe_registry",
+    metadata,
+    sqlalchemy.Column("golden_id", sqlalchemy.String, primary_key=True),
+    sqlalchemy.Column("client_id", sqlalchemy.String, index=True),
+    sqlalchemy.Column("prompt_hash", sqlalchemy.String),
+    sqlalchemy.Column("model", sqlalchemy.String),
+    sqlalchemy.Column("baseline_embedding", sqlalchemy.Text),   # JSON array of floats
+    sqlalchemy.Column("replay_count", sqlalchemy.Integer, default=0),
+    sqlalchemy.Column("created_at", sqlalchemy.DateTime, server_default=sqlalchemy.func.now()),
+)
+
+
 async def init_db():
     engine = sqlalchemy.create_engine(DATABASE_URL)
     metadata.create_all(engine)
@@ -77,3 +93,72 @@ async def get_baseline(probe_id: str) -> str | None:
     query = sqlalchemy.select(baselines_table.c.response).where(baselines_table.c.probe_id == probe_id)
     row = await database.fetch_one(query)
     return row["response"] if row else None
+
+
+# ── Golden probe registry helpers ─────────────────────────────────────────────
+
+async def save_golden_probe(golden_id: str, client_id: str, prompt_hash: str,
+                             model: str, baseline_embedding: list) -> None:
+    """
+    Upsert a golden probe registry entry.
+    Called when the SDK reports a new golden probe via /api/sdk/ingest.
+    """
+    import json
+    embedding_json = json.dumps(baseline_embedding)
+
+    existing = await database.fetch_one(
+        sqlalchemy.select(golden_probe_registry.c.golden_id).where(
+            golden_probe_registry.c.golden_id == golden_id
+        )
+    )
+    if existing:
+        return  # Already registered — baseline is immutable once set
+
+    await database.execute(
+        golden_probe_registry.insert().values(
+            golden_id=golden_id,
+            client_id=client_id,
+            prompt_hash=prompt_hash,
+            model=model,
+            baseline_embedding=embedding_json,
+            replay_count=0,
+        )
+    )
+
+
+async def get_golden_probe(golden_id: str) -> dict | None:
+    """Fetch a golden probe entry by ID."""
+    import json
+    row = await database.fetch_one(
+        sqlalchemy.select(golden_probe_registry).where(
+            golden_probe_registry.c.golden_id == golden_id
+        )
+    )
+    if not row:
+        return None
+    r = dict(row)
+    r["baseline_embedding"] = json.loads(r["baseline_embedding"]) if r["baseline_embedding"] else []
+    return r
+
+
+async def get_random_golden_for_client(client_id: str) -> dict | None:
+    """Return a random golden probe for a given client to replay."""
+    import json
+    row = await database.fetch_one(
+        sqlalchemy.select(golden_probe_registry).where(
+            golden_probe_registry.c.client_id == client_id
+        ).order_by(sqlalchemy.func.random()).limit(1)
+    )
+    if not row:
+        return None
+    r = dict(row)
+    r["baseline_embedding"] = json.loads(r["baseline_embedding"]) if r["baseline_embedding"] else []
+    return r
+
+
+async def increment_golden_replay_count(golden_id: str) -> None:
+    await database.execute(
+        golden_probe_registry.update()
+        .where(golden_probe_registry.c.golden_id == golden_id)
+        .values(replay_count=golden_probe_registry.c.replay_count + 1)
+    )
