@@ -4,10 +4,33 @@ import sqlalchemy
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///verispect.db")
 
-# Databases needs an absolute path or special formatting for sqlite sometimes, 
-# but sqlite:///verispect.db works generally.
 database = Database(DATABASE_URL)
 metadata = sqlalchemy.MetaData()
+
+# ── Client accounts ───────────────────────────────────────────────────────────
+clients_table = sqlalchemy.Table(
+    "clients",
+    metadata,
+    sqlalchemy.Column("id",           sqlalchemy.String,   primary_key=True),   # UUID
+    sqlalchemy.Column("company_name", sqlalchemy.String,   nullable=False),
+    sqlalchemy.Column("email",        sqlalchemy.String,   nullable=False, unique=True),
+    sqlalchemy.Column("password_hash",sqlalchemy.String,   nullable=False),
+    sqlalchemy.Column("plan",         sqlalchemy.String,   default="free"),      # free | pro | enterprise
+    sqlalchemy.Column("created_at",   sqlalchemy.DateTime, server_default=sqlalchemy.func.now()),
+)
+
+# ── API keys (vs_live_xxx) ────────────────────────────────────────────────────
+api_keys_table = sqlalchemy.Table(
+    "api_keys",
+    metadata,
+    sqlalchemy.Column("id",           sqlalchemy.String,   primary_key=True),   # UUID
+    sqlalchemy.Column("client_id",    sqlalchemy.String,   sqlalchemy.ForeignKey("clients.id"), nullable=False),
+    sqlalchemy.Column("key_value",    sqlalchemy.String,   nullable=False, unique=True),  # vs_live_xxx
+    sqlalchemy.Column("name",         sqlalchemy.String,   default="Default"),
+    sqlalchemy.Column("is_active",    sqlalchemy.Integer,  default=1),
+    sqlalchemy.Column("last_used_at", sqlalchemy.DateTime, nullable=True),
+    sqlalchemy.Column("created_at",   sqlalchemy.DateTime, server_default=sqlalchemy.func.now()),
+)
 
 logs_table = sqlalchemy.Table(
     "logs",
@@ -162,3 +185,86 @@ async def increment_golden_replay_count(golden_id: str) -> None:
         .where(golden_probe_registry.c.golden_id == golden_id)
         .values(replay_count=golden_probe_registry.c.replay_count + 1)
     )
+
+
+# ── Client auth helpers ───────────────────────────────────────────────────────
+
+async def create_client(client_id: str, company_name: str, email: str, password_hash: str) -> None:
+    await database.execute(clients_table.insert().values(
+        id=client_id,
+        company_name=company_name,
+        email=email,
+        password_hash=password_hash,
+        plan="free",
+    ))
+
+
+async def get_client_by_email(email: str) -> dict | None:
+    row = await database.fetch_one(
+        clients_table.select().where(clients_table.c.email == email)
+    )
+    return dict(row) if row else None
+
+
+async def get_client_by_id(client_id: str) -> dict | None:
+    row = await database.fetch_one(
+        clients_table.select().where(clients_table.c.id == client_id)
+    )
+    return dict(row) if row else None
+
+
+# ── API key helpers ───────────────────────────────────────────────────────────
+
+async def create_api_key(key_id: str, client_id: str, key_value: str, name: str) -> None:
+    await database.execute(api_keys_table.insert().values(
+        id=key_id,
+        client_id=client_id,
+        key_value=key_value,
+        name=name,
+        is_active=1,
+    ))
+
+
+async def get_client_id_from_key(key_value: str) -> str | None:
+    """Validate an SDK key and return the client_id. Returns None if invalid/revoked."""
+    row = await database.fetch_one(
+        sqlalchemy.select(api_keys_table.c.client_id, api_keys_table.c.id)
+        .where(
+            sqlalchemy.and_(
+                api_keys_table.c.key_value == key_value,
+                api_keys_table.c.is_active == 1,
+            )
+        )
+    )
+    if row:
+        # Update last_used_at asynchronously
+        from datetime import datetime
+        await database.execute(
+            api_keys_table.update()
+            .where(api_keys_table.c.id == row["id"])
+            .values(last_used_at=datetime.utcnow())
+        )
+        return row["client_id"]
+    return None
+
+
+async def list_api_keys(client_id: str) -> list:
+    rows = await database.fetch_all(
+        api_keys_table.select()
+        .where(api_keys_table.c.client_id == client_id)
+        .order_by(api_keys_table.c.created_at.desc())
+    )
+    return [dict(r) for r in rows]
+
+
+async def revoke_api_key(key_id: str, client_id: str) -> bool:
+    """Revoke a key. Verifies it belongs to this client."""
+    result = await database.execute(
+        api_keys_table.update()
+        .where(sqlalchemy.and_(
+            api_keys_table.c.id == key_id,
+            api_keys_table.c.client_id == client_id,
+        ))
+        .values(is_active=0)
+    )
+    return result > 0

@@ -1,7 +1,17 @@
 import { useState, useEffect } from 'react'
+import { Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom'
 import { getMetrics, getLogs, getDriftEvents, getDriftTimeline, getComplianceSummary, downloadReport } from './api'
-import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, BarChart, Bar, Cell } from 'recharts'
+import { isLoggedIn, getUser, logout } from './auth'
+import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer } from 'recharts'
+import Login    from './pages/Login'
+import Register from './pages/Register'
+import Account  from './pages/Account'
 import './index.css'
+
+// ── Route guard ───────────────────────────────────────────────────────────────
+function Protected({ children }) {
+  return isLoggedIn() ? children : <Navigate to="/login" replace />
+}
 
 const CATEGORY_LABELS = {
   gender: 'Gender',
@@ -85,8 +95,22 @@ function SeverityBadge({ severity }) {
   return <span className={`severity-badge ${config.className}`}>{config.label}</span>
 }
 
-/* ===== Main App ===== */
+/* ===== Main App (router shell) ===== */
 export default function App() {
+  return (
+    <Routes>
+      <Route path="/login"    element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/account"  element={<Protected><Account /></Protected>} />
+      <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />
+      <Route path="/" element={<Navigate to={isLoggedIn() ? '/dashboard' : '/login'} replace />} />
+      <Route path="*" element={<Navigate to={isLoggedIn() ? '/dashboard' : '/login'} replace />} />
+    </Routes>
+  )
+}
+
+/* ===== Dashboard ===== */
+function Dashboard() {
   const [metrics, setMetrics] = useState(null)
   const [logs, setLogs] = useState([])
   const [driftEvents, setDriftEvents] = useState([])
@@ -139,28 +163,35 @@ export default function App() {
         <div className="app-header-logo">
           <span>⚡</span> Verispect
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div className="app-header-status">
             <div className="status-dot"></div>
             Live Monitoring
           </div>
           <button
-            onClick={downloadReport}
+            onClick={() => downloadReport(getUser()?.company_name)}
             style={{
               background: 'linear-gradient(135deg, #7c6eff 0%, #a78bfa 100%)',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '8px 16px',
-              fontSize: '13px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
+              color: 'white', border: 'none', borderRadius: '8px',
+              padding: '8px 16px', fontSize: '13px', fontWeight: '600', cursor: 'pointer',
             }}
           >
-            📄 Download Report
+            📄 Report
+          </button>
+          <Link to="/account" style={{
+            background: 'rgba(124,110,255,0.15)', color: '#a78bfa',
+            border: '1px solid rgba(124,110,255,0.3)', borderRadius: '8px',
+            padding: '7px 14px', fontSize: '13px', fontWeight: '600',
+            textDecoration: 'none',
+          }}>
+            ⚙ Account
+          </Link>
+          <button onClick={logout} style={{
+            background: 'transparent', border: '1px solid rgba(255,255,255,0.1)',
+            color: '#6b7280', borderRadius: '8px', padding: '7px 14px',
+            fontSize: '13px', cursor: 'pointer',
+          }}>
+            Sign Out
           </button>
         </div>
       </div>
