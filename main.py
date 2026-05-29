@@ -1,13 +1,12 @@
 import os
-import pathlib
 from fastapi import FastAPI, Request, HTTPException, Depends
-from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.responses import JSONResponse, StreamingResponse, FileResponse
 from fastapi.background import BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from forwarder import forward_to_openai, stream_openai
-from database import init_db, log_call, database
+from database import init_db, log_call
 from canary import maybe_run_canary
 from api import router
 import time
@@ -20,7 +19,12 @@ app = FastAPI(title="Verispect", description="AI Model Drift Detection & Complia
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://verispectai.com", "https://www.verispectai.com"],
+    allow_origins=[
+        "http://localhost:5173",  # Local dev
+        "http://localhost:3000",  # Alt dev port
+        "https://verispectai.com",
+        "https://www.verispectai.com"
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -36,14 +40,22 @@ async def verify_api_key(request: Request):
 
 app.include_router(router, dependencies=[Depends(verify_api_key)])
 
+# Serve built React frontend — only if the dist folder exists (production)
+DIST_DIR = os.path.join(os.path.dirname(__file__), "dashboard", "dist")
+if os.path.isdir(DIST_DIR):
+    app.mount("/assets", StaticFiles(directory=os.path.join(DIST_DIR, "assets")), name="assets")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_frontend(full_path: str):
+        # Don't intercept API or proxy routes
+        if full_path.startswith("api/") or full_path.startswith("v1/"):
+            raise HTTPException(status_code=404)
+        index = os.path.join(DIST_DIR, "index.html")
+        return FileResponse(index)
+
 @app.on_event("startup")
 async def startup():
     await init_db()
-    await database.connect()
-
-@app.on_event("shutdown")
-async def shutdown():
-    await database.disconnect()
 
 @app.get("/health")
 def health():
@@ -109,8 +121,3 @@ async def intercept(request: Request, background_tasks: BackgroundTasks):
     background_tasks.add_task(maybe_run_canary, body, auth)
     
     return JSONResponse(result)
-
-# Serve React dashboard static files (must be AFTER all API routes)
-dashboard_dist = pathlib.Path(__file__).parent / "dashboard" / "dist"
-if dashboard_dist.exists():
-    app.mount("/", StaticFiles(directory=str(dashboard_dist), html=True), name="dashboard")
