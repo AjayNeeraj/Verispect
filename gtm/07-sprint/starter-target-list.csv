@@ -1,0 +1,37 @@
+Tier,Company,Geo,Vertical,Likely LLM use case (personalization hook),Why now / signal,Contact (RESEARCH),Title,LinkedIn/Email (RESEARCH),Status,Notes
+A,Empion,Berlin DE,HR-tech,AI culture/skills matching for recruitment,Annex III high-risk hiring; EU HQ,,,,Research,VERIFY HQ+use before outreach
+A,Beamery,London UK,HR-tech,AI talent matching & candidate ranking,Large EU enterprise clients = procurement pressure,,,,Research,
+A,Textkernel,Amsterdam NL,HR-tech,CV parsing & job matching (ML/LLM),Core hiring-decision AI; EU HQ,,,,Research,
+A,Equalture,Rotterdam NL,HR-tech,Bias-aware hiring assessments,Already sells 'fair hiring' = must prove it,,,,Research,Strong narrative fit
+A,Tengai,Stockholm SE,HR-tech,Unbiased AI interview screening,Brand = unbiased; needs evidence,,,,Research,Strong fit
+A,Retorio,Munich DE,HR-tech,AI video interview / behavioral scoring,Behavioral scoring = high bias scrutiny,,,,Research,
+B,HeroHunt.ai,Netherlands,HR-tech,LLM candidate sourcing,Publishes on EU AI Act + hiring,,,,Research,Content shows awareness
+B,SmartRecruiters,EU/US,HR-tech,AI candidate screening in ATS,EU customers,,,,Research,
+B,Honeypot,Berlin DE,HR-tech,Dev hiring marketplace + matching,,,,,Research,
+B,Personio,Munich DE,HR-tech,HR platform adding AI features,Scale-up; many EU SMB customers,,,,Research,
+A,Taktile,Berlin DE,Fintech,Automated credit/risk decisioning,Credit decisions = Annex III high-risk,,,,Research,Strong fit
+A,Abound,London UK,Fintech,AI consumer credit underwriting,Lending decisions on individuals,,,,Research,
+A,Lendable,London UK,Fintech,ML credit/lending decisions,Consumer lending at scale,,,,Research,
+A,Kennek,London UK,Fintech,Lending operations / underwriting,,,,,Research,
+B,Solaris,Berlin DE,Fintech,Banking-as-a-service + risk models,Regulated; many partners,,,,Research,
+B,Scalable Capital,Munich DE,Fintech,Robo-advisory / risk profiling,Automated financial decisions,,,,Research,
+A,Akur8,Paris FR,Insurtech,ML insurance pricing/underwriting,Pricing decisions on individuals,,,,Research,Strong fit
+A,Shift Technology,Paris FR,Insurtech,AI claims & fraud decisioning,Claims decisions affect customers,,,,Research,Strong fit
+B,wefox,Berlin DE,Insurtech,AI claims/underwriting assist,,,,,Research,
+B,Getsafe,Heidelberg DE,Insurtech,AI claims automation,,,,,Research,
+B,Zego,London UK,Insurtech,Usage-based pricing ML,,,,,Research,
+A,Robin AI,London UK,Legal-tech,LLM contract review & risk,Legal decisions; LLM-native,,,,Research,Strong fit
+A,Leya,Stockholm SE,Legal-tech,LLM legal research/review,LLM-native legal workflows,,,,Research,Strong fit
+A,Luminance,Cambridge UK,Legal-tech,AI contract analysis,Document decisions for clients,,,,Research,
+B,Genie AI,London UK,Legal-tech,LLM legal drafting/review,,,,,Research,
+B,Juro,London UK,Legal-tech,Contract automation + AI,,,,,Research,
+B,Definely,London UK,Legal-tech,Contract drafting AI,,,,,Research,
+A,Bayzat,Dubai UAE,HR-tech,HR & payroll + AI features,UAE governance push; HR decisions,,,,Research,UAE beachhead
+A,ADVANCE.AI,Singapore,Fintech,AI KYC + credit scoring (APAC),SG Model AI Governance; credit decisions,,,,Research,SG beachhead
+B,Kredivo / FinAccel,Singapore,Fintech,AI consumer credit (SEA),Credit decisions at scale,,,,Research,
+B,Lenddo,Singapore,Fintech,Alt-data credit scoring,,,,,Research,
+B,G42,Abu Dhabi UAE,AI/Enterprise,Enterprise AI incl regulated use,Large; governance-aware,,,,Research,Enterprise motion
+B,Sava,Dubai UAE,Fintech,SME spend/credit AI,,,,,Research,
+C,Tractable,London UK,Insurtech,AI visual claims assessment,,,,,Research,
+C,HireVue,US/EU,HR-tech,AI video interview assessment,EU exposure; bias scrutiny history,,,,Research,US HQ - EU ops only
+C,Personio/others,DACH,HR-tech,—,Expand via Sales Nav,,,,Research,Placeholder - expand
