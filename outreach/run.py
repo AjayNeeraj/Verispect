@@ -16,7 +16,7 @@ Daily loop: run it once/day (cron or the scheduler). It auto-advances steps & re
 """
 import argparse, csv, os, sys
 sys.path.insert(0, os.path.dirname(__file__))
-import engine, sender
+import engine, sender, enrich
 
 DEFAULT_LEADS = os.path.join(os.path.dirname(__file__), "..", "gtm", "07-sprint", "starter-target-list.csv")
 
@@ -24,16 +24,36 @@ def load_leads(path):
     with open(path, encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
+def _persist_emails(path, leads):
+    """Write enriched emails/contacts back to the lead CSV so we never re-pay to enrich."""
+    if not leads:
+        return
+    fields = list(leads[0].keys())
+    if "email" not in fields:
+        fields.append("email")
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=fields)
+        w.writeheader()
+        for ld in leads:
+            w.writerow({k: ld.get(k, "") for k in fields})
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--leads", default=DEFAULT_LEADS)
     ap.add_argument("--step", type=int, default=1)
     ap.add_argument("--cap", type=int, default=60)
     ap.add_argument("--send", action="store_true", help="actually send via SMTP (else dry-run)")
+    ap.add_argument("--enrich", action="store_true", help="find+verify emails via Hunter/Apollo (needs API key)")
     args = ap.parse_args()
 
     leads = load_leads(args.leads)
     print(f"[run] loaded {len(leads)} leads from {os.path.abspath(args.leads)}")
+
+    if args.enrich:
+        leads, found = enrich.enrich_leads(leads)
+        if found:
+            _persist_emails(args.leads, leads)
+            print(f"[run] wrote {found} verified emails back to {args.leads}")
     print(f"[run] {engine.SPOTS_LEFT} founding spots left · {engine.days_to_deadline()} days to deadline")
 
     msgs = engine.build_campaign(leads, step=args.step, daily_cap=args.cap)
