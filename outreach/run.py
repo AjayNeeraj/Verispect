@@ -16,6 +16,11 @@ Daily loop: run it once/day (cron or the scheduler). It auto-advances steps & re
 """
 import argparse, csv, os, sys
 sys.path.insert(0, os.path.dirname(__file__))
+try:
+    from dotenv import load_dotenv  # secrets live in gitignored .env, never in chat/repo
+    load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+except Exception:
+    pass
 import engine, sender, enrich
 
 DEFAULT_LEADS = os.path.join(os.path.dirname(__file__), "..", "gtm", "07-sprint", "starter-target-list.csv")
