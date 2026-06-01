@@ -4,28 +4,19 @@
 
 ## EMAIL
 
-**Subject:** Tengai's AI + Aug 2026
+**Subject:** ai act · Tengai
 
-Hi there,
+Tengai's LLM for Unbiased AI interview screening is high-risk under the EU AI Act (live Aug 2026), and providers change models with no changelog.
+Verispect proves yours isn't drifting/biased in 1 line of code — we never see your data.
+Free 5-min snapshot of your model? https://verispectai.com/founding
 
-Tengai uses an LLM for Unbiased AI interview screening. From 2 Aug 2026 the EU AI Act needs that to prove it isn't drifting or biased — and providers change models behind a stable name with no changelog.
-
-Verispect generates that proof in one line of code. Zero added latency, and we never see your data (only hashes + vectors).
-
-Want a free 5-minute snapshot of your model's real drift? https://verispectai.com/founding
-(Opening founding pricing to 20 EU/SG/UAE teams — 14 spots left.)
-
-—
-Ajay, Founder, Verispect
-Verispect · Verispect, [registered address]
-You're receiving this because your role relates to AI in production and the EU AI Act. Not relevant? Reply STOP and I'll remove you immediately. Unsubscribe: https://verispectai.com/founding?unsub=e875c3d760
+— Ajay, Verispect · https://verispectai.com/founding?unsub=e875c3d760 to opt out
 
 ## LINKEDIN — connect note
 
-Hi there — building Verispect: active bias/drift detection for production LLMs, EU AI Act focus. Saw Tengai uses an LLM for Unbiased AI interview screening — exactly what the Act covers from Aug 2026. Opening 20 founding spots for EU AI teams; thought you'd want to know. Connect?
+Tengai runs LLMs in Unbiased AI interview screening; that's high-risk under the EU AI Act from Aug 2026. Built Verispect to prove a model isn't biased/drifting in 1 line (we never see your data). Worth connecting?
 
 ## LINKEDIN — DM after accept
 
-Thanks for connecting! Relevant + quick: from 2 Aug 2026 the EU AI Act needs high-risk AI (Unbiased AI interview screening qualifies) to evidence bias monitoring + drift. Most teams have the policy, not the live proof.
-
-I built the tool that generates it — one line, zero latency, we never see your data. Want a free 5-min snapshot of Tengai's model? No pitch, just your real numbers.
+thanks! quick + real: Aug 2026 the AI Act needs your Unbiased AI interview screening model to prove no bias/drift. Verispect does it in one line, we never see your data.
+free 5-min snapshot of Tengai's model? just your real numbers, no pitch.

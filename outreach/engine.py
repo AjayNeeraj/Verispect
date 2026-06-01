@@ -80,6 +80,18 @@ def segment_for(vertical):
     return T.VERTICAL_SEGMENT.get(vertical, "head_ai")
 
 
+def _tidy(text):
+    """Clean up when contact name is unknown (fallback 'there'), so copy reads natural."""
+    text = text.replace("thanks there!", "thanks!").replace("thanks !", "thanks!")
+    for lead_in in ("there — ", "there —", "there - "):
+        if text.startswith(lead_in):
+            text = text[len(lead_in):].lstrip()
+            break
+    if text.startswith("— "):
+        text = text[2:]
+    return text
+
+
 def render_email(lead, step=1):
     tk = tokens(lead)
     seg = segment_for(tk["vertical"])
@@ -88,7 +100,7 @@ def render_email(lead, step=1):
     else:
         tpl = T.EMAIL_FOLLOWUP[step]
     subject = tpl["subject"].format(**tk)
-    body = tpl["body"].format(**tk)
+    body = _tidy(tpl["body"].format(**tk))
     unsub = f"{T.SNAPSHOT_LINK}?unsub={lead_id(lead)}"
     footer = T.FOOTER.format(sender=T.SENDER_NAME, title=T.SENDER_TITLE,
                              addr=T.COMPANY_ADDR, unsub=unsub)
@@ -97,7 +109,7 @@ def render_email(lead, step=1):
 
 def render_linkedin(lead, kind="connect"):
     tk = tokens(lead)
-    return T.LINKEDIN[kind].format(**tk)
+    return _tidy(T.LINKEDIN[kind].format(**tk))
 
 
 def email_ok(lead):

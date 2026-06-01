@@ -4,27 +4,19 @@
 
 ## EMAIL
 
-**Subject:** Art. 72 evidence before the deadline
+**Subject:** art. 72 proof · Zego
 
-Hi there,
+Art. 72 + 10 of the AI Act (Aug 2026) need Zego to *evidence* bias + drift monitoring for Usage-based pricing ML. Policy's easy; live proof isn't.
+Verispect auto-generates it, article-mapped — and never sees your data (hashes + vectors only).
+Want the sample report + a free snapshot? https://verispectai.com/founding
 
-You likely own AI Act readiness at Zego. The hard part is evidencing continuous monitoring (Art. 72) and bias (Art. 10) for Usage-based pricing ML — policy is easy, live proof isn't.
-
-Verispect auto-generates it: active probes → an article-mapped readiness report. Privacy-first — we receive only hashes and vectors, never prompts or PII.
-
-Want the sample report + a free snapshot of your model? https://verispectai.com/founding
-
-—
-Ajay, Founder, Verispect
-Verispect · Verispect, [registered address]
-You're receiving this because your role relates to AI in production and the EU AI Act. Not relevant? Reply STOP and I'll remove you immediately. Unsubscribe: https://verispectai.com/founding?unsub=8aca0f3aa2
+— Ajay, Verispect · https://verispectai.com/founding?unsub=8aca0f3aa2 to opt out
 
 ## LINKEDIN — connect note
 
-Hi there — building Verispect: active bias/drift detection for production LLMs, EU AI Act focus. Saw Zego uses an LLM for Usage-based pricing ML — exactly what the Act covers from Aug 2026. Opening 20 founding spots for EU AI teams; thought you'd want to know. Connect?
+Zego runs LLMs in Usage-based pricing ML; that's high-risk under the EU AI Act from Aug 2026. Built Verispect to prove a model isn't biased/drifting in 1 line (we never see your data). Worth connecting?
 
 ## LINKEDIN — DM after accept
 
-Thanks for connecting! Relevant + quick: from 2 Aug 2026 the EU AI Act needs high-risk AI (Usage-based pricing ML qualifies) to evidence bias monitoring + drift. Most teams have the policy, not the live proof.
-
-I built the tool that generates it — one line, zero latency, we never see your data. Want a free 5-min snapshot of Zego's model? No pitch, just your real numbers.
+thanks! quick + real: Aug 2026 the AI Act needs your Usage-based pricing ML model to prove no bias/drift. Verispect does it in one line, we never see your data.
+free 5-min snapshot of Zego's model? just your real numbers, no pitch.
