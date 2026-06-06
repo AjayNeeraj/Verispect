@@ -14,6 +14,7 @@ from database import init_db, log_call, database
 from canary import maybe_run_canary
 from auth import require_auth
 from api import router, auth_router, keys_router, sdk_router
+from risk_classifier import risk_router
 
 load_dotenv()
 
@@ -46,6 +47,9 @@ app.include_router(keys_router)
 
 # SDK ingest/probe — protected by vs_live_xxx key validated against DB
 app.include_router(sdk_router)
+
+# Risk Classifier agent (Module 1) — Annex III classification + record PDF
+app.include_router(risk_router)
 
 # ── Lifecycle ─────────────────────────────────────────────────────────────────
 @app.on_event("startup")
