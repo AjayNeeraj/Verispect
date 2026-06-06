@@ -3,7 +3,7 @@ billing.py — Verispect billing (Stripe Checkout + webhooks).
 
 Fast path for the 15-day sprint:
   - For the Founding 20 you can sell with ZERO code using Stripe Payment Links
-    (create them in the Stripe dashboard for €790/yr and €79/mo, paste into the
+    (create them in the Stripe dashboard for $15,000/yr and $1,500/mo, paste into the
     landing page PAY_LINK + the offer PDF). Take a verbal yes -> send the link.
   - This module adds proper in-app Checkout + webhooks for when you want
     self-serve upgrades from the dashboard.
@@ -11,8 +11,8 @@ Fast path for the 15-day sprint:
 Env vars required (set in Railway / .env):
   STRIPE_SECRET_KEY        = sk_live_... (or sk_test_...)
   STRIPE_WEBHOOK_SECRET    = whsec_...
-  STRIPE_PRICE_PRO_MONTH   = price_...   (€79 founding monthly)
-  STRIPE_PRICE_PRO_YEAR    = price_...   (€790 founding annual)
+  STRIPE_PRICE_PRO_MONTH   = price_...   ($1,500/mo — Founding rate, locked for life)
+  STRIPE_PRICE_PRO_YEAR    = price_...   ($15,000/yr — Founding annual)
   BILLING_SUCCESS_URL      = https://verispectai.com/dashboard?upgraded=1
   BILLING_CANCEL_URL       = https://verispectai.com/founding
 

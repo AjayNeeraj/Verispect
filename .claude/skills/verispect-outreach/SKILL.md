@@ -33,7 +33,7 @@ Live send needs env: `HUNTER_API_KEY`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `S
 - Review `outreach/outbox/` (one .md per lead) or `outbox.csv` (mail-merge).
 - Log results in `gtm/07-sprint/Verispect-Sprint-Tracker.xlsx` (5 numbers: touches, snapshots, demos, closes, spots left).
 - Update `SPOTS_LEFT` in `outreach/engine.py` + the landing page as founders join (keep scarcity honest).
-- New replies → send free snapshot → demo → close (€79/mo founding, locked for life).
+- New replies → send free snapshot → demo → close. Price = $1,500/mo (Founding 20 locks $1,500 for life before it rises to $2,500). Never quote price in cold copy — sell the free snapshot; price on the call, anchored to AI Act fines (up to €15M / 3% turnover) vs €50k+ manual projects.
 
 ## Context
 Full reshape/offer: `gtm/07-sprint/00-reshape-and-offer.md`. Battle plan + funnel math: `gtm/07-sprint/01-15-day-battle-plan.md`. Day-0 setup: `gtm/07-sprint/06-day0-setup-checklist.md`.

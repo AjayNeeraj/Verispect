@@ -36,7 +36,7 @@ incl_rows=[
     ["✓","Continuous monitoring","Active bias & drift probes + automatic monthly report."],
     ["✓","White-glove setup","We integrate the one line with you on a 30-min call. Zero effort."],
     ["✓","“Monitoring Active” badge","Verispect Verified badge for your site & security page."],
-    ["✓","Founding price, locked for life","€79/mo or €790/yr — public price is €99. Never increases."],
+    ["✓","Founding rate, locked for life","$1,500/mo or $15,000/yr — locked before it rises to $2,500. Never increases for you."],
     ["✓","Direct founder line","Private Slack with Ajay, whenever you need him."],
 ]
 t=Table([[Paragraph(f'<font color="#10b981"><b>{a}</b></font>',incl),Paragraph(f"<b>{b}</b>",incl),Paragraph(c,body)] for a,b,c in incl_rows],

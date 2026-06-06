@@ -6,7 +6,7 @@
 
 ## 1. The reshape in one move
 
-We stop selling **a monitoring tool** (slow, "nice to have," self-serve €99/mo — a months-long close). We start selling **a deadline outcome**:
+We stop selling **a cheap monitoring tool** (slow, "nice to have," a months-long close). We start selling **a deadline outcome at a premium price** — "Vanta for the EU AI Act":
 
 > **"AI Act Readiness — proof your AI behaves, before 2 August 2026. Live in a day. We never see your data."**
 
@@ -34,7 +34,7 @@ Each Founding Customer gets:
 2. **Continuous monitoring** — active bias/drift probes + monthly auto-report. *(the recurring value)*
 3. **White-glove setup** — founder integrates the one line *with* them on a 30-min call. Zero effort. *(removes friction)*
 4. **"Verispect Verified — Monitoring Active" trust badge** — for their site/security page. *(distribution + status — they market us)*
-5. **Founding price, locked for life** — **€79/mo (or €790/yr)**, vs the public €99/€1,188. Never increases. *(loss-aversion + reward for early)*
+5. **Founding rate, locked for life** — **$1,500/mo (or $15,000/yr)**, locked before it **rises to $2,500/mo** after the Founding 20. Never increases for you. *(loss-aversion via the rise, not a discount — keeps the premium frame)*
 6. **Direct founder line** — private Slack/WhatsApp with Ajay. *(white-glove, builds the reference relationship)*
 
 **Scarcity:** only 20 spots. **Urgency:** the deadline + spots filling publicly ("7 of 20 left").
@@ -45,8 +45,9 @@ Each Founding Customer gets:
 ## 4. CFO math — does "Founding 20" hit the target?
 
 Goal: 10–20 sales in 15 days.
-- 20 founding customers on **annual prepay €790** = **€15,800 cash** in the door + €15,800 ARR locked.
-- 20 on **monthly €79** = €1,580 MRR = €18,960 ARR, less cash now.
+- 20 founding customers on **annual prepay $15,000** = **$300,000 cash** in the door + $300k ARR locked.
+- 20 on **monthly $1,500** = $30,000 MRR = $360,000 ARR.
+- Even 10 closes = **$15k MRR / $180k ARR** — a real seed-stage base from one cohort.
 - **Push annual** for the sprint (cash + commitment + lower churn). Offer monthly as the fallback for hesitant yeses.
 - Blended realistic 15-day outcome (see battle plan): ~10–15 closes, mix of annual + monthly ≈ **€8k–14k cash + €12k–19k ARR**. Strong for a solo founder's first 15 days, and 20 reference logos that fuel everything after.
 

@@ -62,9 +62,8 @@ EMAIL_FOLLOWUP = {
     3: {  # day +7  (breakup + scarcity)
         "subject": "{spots} founding spots left",
         "body": (
-            "{first} — closing the Founding 20 ({spots} left). €79/mo locked for life, I set it up, "
-            "free snapshot first.\n"
-            "Want a spot before Aug 2026, or should I close the loop?"
+            "{first} — closing the Founding 20 ({spots} left): lock founding terms before they rise.\n"
+            "Want your free AI Act snapshot before Aug 2026, or should I close the loop?"
         ),
     },
 }

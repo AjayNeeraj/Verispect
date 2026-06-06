@@ -49,9 +49,9 @@ ws.column_dimensions["A"].width = 40; ws.column_dimensions["B"].width = 16; ws.c
 rows = [
     ("DRIVER", "VALUE", "NOTE"),
     ("Pricing (€/mo)", "", ""),
-    ("Pro price", 99, "self-serve workhorse"),
-    ("Business price", 399, "scale-up / enterprise-facing"),
-    ("Enterprise avg price", 4000, "custom 2k-10k, avg modeled"),
+    ("Pro price", 1500, "Verispect standard, $/mo"),
+    ("Business price", 1500, "Founding rate locked (rises to 2500)"),
+    ("Enterprise avg price", 5000, "multi-entity/SSO/SLA, avg modeled"),
     ("Annual discount", 0.167, "~2 months free"),
     ("New logos / month", "", ""),
     ("New Free signups / mo (start)", 40, "grows with marketing"),
@@ -190,7 +190,7 @@ for c in "BCD":
     ws3.column_dimensions[c].width = 16
 header(ws3, 4, ["Metric", "Pro", "Business", "Enterprise"])
 ue = [
-    ("Price / mo (€)", 99, 399, 4000),
+    ("Price / mo ($)", 1500, 1500, 5000),
     ("Gross margin", 0.90, 0.89, 0.88),
     ("Avg lifetime (months)", 28, 40, 48),
     ("Monthly contribution (€)", "=B6*B7", "=C6*C7", "=D6*D7"),

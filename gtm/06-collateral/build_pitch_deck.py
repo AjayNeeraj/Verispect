@@ -182,16 +182,16 @@ bullets(t.text_frame,[
 ], size=17, space=12)
 
 # 11 — BUSINESS MODEL
-s = slide(); title_only(s, "Business model", "Free wedge → Pro self-serve → Enterprise. ~88–90% gross margin.")
-tiers=[("Free","€0","10k calls, 1 report"),("Pro","€99/mo","250k calls, all probes, alerts"),
-       ("Business","€399/mo","2M calls, 10 models, unlimited reports"),("Enterprise","€2–10k/mo","white-label, custom probes, SLA, audit support")]
+s = slide(); title_only(s, "Business model", "One product, zero config. Premium, value-based. ~95% gross margin.")
+tiers=[("Free","$0","AI Act snapshot — lead magnet"),("Verispect","$1,500/mo","zero config · everything · always-current audit pack"),
+       ("Founding 20","$1,500 locked","for life, before it rises to $2,500"),("Enterprise","from $2,500/mo","multi-entity · SSO · SLA · audit support")]
 x=0.8
 for name,price,desc in tiers:
     c=s.shapes.add_shape(1,Inches(x),Inches(2.4),Inches(2.85),Inches(3.0))
-    c.fill.solid(); c.fill.fore_color.rgb=(PURPLE if name=="Pro" else LT); c.line.fill.background(); c.shadow.inherit=False
+    c.fill.solid(); c.fill.fore_color.rgb=(PURPLE if name=="Verispect" else LT); c.line.fill.background(); c.shadow.inherit=False
     tf=c.text_frame; tf.word_wrap=True; tf.margin_top=Inches(0.3)
-    col = WHITE if name=="Pro" else DARK
-    txt(tf,name,20,(WHITE if name=="Pro" else PURPLE),bold=True,align=PP_ALIGN.CENTER,space=4)
+    col = WHITE if name=="Verispect" else DARK
+    txt(tf,name,20,(WHITE if name=="Verispect" else PURPLE),bold=True,align=PP_ALIGN.CENTER,space=4)
     txt(tf,price,18,col,bold=True,align=PP_ALIGN.CENTER,space=8)
     txt(tf,desc,13,col,align=PP_ALIGN.CENTER)
     x+=3.05

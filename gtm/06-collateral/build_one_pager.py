@@ -90,8 +90,8 @@ ct.setStyle(TableStyle(cstyle)); st.append(ct)
 
 # Pricing strip + CTA
 st.append(Paragraph("Pricing", h2))
-st.append(Paragraph("<b>Free</b> (10k calls/mo) &nbsp;·&nbsp; <b>Pro €99/mo</b> (most popular) &nbsp;·&nbsp; "
-                    "<b>Business €399/mo</b> &nbsp;·&nbsp; <b>Enterprise</b> (custom, white-label + SLA). "
+st.append(Paragraph("<b>Free AI Act snapshot</b> &nbsp;·&nbsp; <b>Verispect $1,500/mo</b> (zero config, everything) &nbsp;·&nbsp; "
+                    "<b>Founding 20: $1,500 locked for life</b> before it rises to $2,500 &nbsp;·&nbsp; <b>Enterprise</b> (custom). "
                     "Start free, no card.", body))
 
 st.append(Spacer(1,4))
