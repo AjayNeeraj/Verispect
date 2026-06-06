@@ -15,6 +15,7 @@ from canary import maybe_run_canary
 from auth import require_auth
 from api import router, auth_router, keys_router, sdk_router
 from risk_classifier import risk_router
+from doc_generator import doc_router
 
 load_dotenv()
 
@@ -50,6 +51,9 @@ app.include_router(sdk_router)
 
 # Risk Classifier agent (Module 1) — Annex III classification + record PDF
 app.include_router(risk_router)
+
+# Evidence Clerk agent (Module 2) — auto DPIA + Annex IV tech-doc from live evidence
+app.include_router(doc_router)
 
 # ── Lifecycle ─────────────────────────────────────────────────────────────────
 @app.on_event("startup")
