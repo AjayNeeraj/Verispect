@@ -1,13 +1,11 @@
-<svg width="280" height="64" viewBox="0 0 280 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Verispect">
+<svg width="290" height="64" viewBox="0 0 290 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Verispect">
   <defs>
-    <linearGradient id="vg2" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+    <linearGradient id="vg2" x1="10" y1="5" x2="54" y2="59" gradientUnits="userSpaceOnUse">
       <stop stop-color="#8B7DFF"/>
       <stop offset="1" stop-color="#6A5CF0"/>
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="16" fill="url(#vg2)"/>
-  <path d="M15 19 L29 45 L38 30" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M38 30 L50 13" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.92"/>
-  <circle cx="50" cy="13" r="4.2" fill="#fff"/>
-  <text x="82" y="41" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="30" font-weight="800" letter-spacing="-0.5" fill="#E7E9F0">Veri<tspan fill="#7C6EFF">spect</tspan></text>
+  <path d="M32 5 L54 13 V31 C54 45.5 44.6 54.6 32 59 C19.4 54.6 10 45.5 10 31 V13 Z" fill="url(#vg2)"/>
+  <path d="M21 32.5 L28.5 40.5 L44 23.5" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="74" y="41" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="30" font-weight="800" letter-spacing="-0.5" fill="#E7E9F0">Veri<tspan fill="#7C6EFF">spect</tspan></text>
 </svg>
