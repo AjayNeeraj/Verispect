@@ -42,8 +42,15 @@ FROM_EMAIL = you@yourdomain.com
 ```
 Put these in `.env` → `python outreach/run.py --enrich --send` works. **Set SPF + DKIM + DMARC** in Spaceship DNS (Spacemail gives the records) before sending cold, or you land in spam. Warm the inbox a few days first.
 
-## 4. Database → Supabase
-`database.py` already reads `DATABASE_URL` (defaults to SQLite). To use Supabase:
+## 4. Database → Supabase  ✅ ALREADY CREATED
+Project **verispect** is live (created via MCP): region **eu-central-1 (Frankfurt, EU data residency)**, ref `zpxpgpwpgugtzpjdxqme`, API URL `https://zpxpgpwpgugtzpjdxqme.supabase.co`. Tables (clients, api_keys, logs, baselines, golden_probe_registry) created + seeded (500 calls / 80 probes / 86% compliance) for the demo.
+
+Get the DB password: **Supabase → Project Settings → Database → Connection string (URI)** (or reset it there). Then:
+```
+DATABASE_URL=postgresql://postgres:[YOUR-DB-PASSWORD]@db.zpxpgpwpgugtzpjdxqme.supabase.co:5432/postgres?ssl=require
+```
+
+`database.py` already reads `DATABASE_URL` (defaults to SQLite). Original notes:
 - Supabase → Project → Settings → Database → Connection string (URI).
 - Use the **Session pooler** or direct connection. Set:
 ```
