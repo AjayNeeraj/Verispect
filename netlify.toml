@@ -1,0 +1,21 @@
+# Netlify config — serves the Verispect landing page (static).
+# Connect the GitHub repo in Netlify; it publishes the `landing/` folder.
+# (Or just drag the `landing/` folder to app.netlify.com/drop — no config needed.)
+
+[build]
+  publish = "landing"
+  command = ""
+
+# Security headers (looks legit + safe; harmless for a static page)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# SVG assets served with correct type
+[[headers]]
+  for = "/assets/*.svg"
+  [headers.values]
+    Content-Type = "image/svg+xml"

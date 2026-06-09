@@ -7,11 +7,11 @@ REM ============================================================
 
 REM --- your keys/login (fill these) ---
 set HUNTER_API_KEY=PASTE_HUNTER_KEY
-set SMTP_HOST=smtp.yourprovider.com
+set SMTP_HOST=mail.spacemail.com
 set SMTP_PORT=587
-set SMTP_USER=ajay@verispectai.com
-set SMTP_PASS=PASTE_APP_PASSWORD
-set FROM_EMAIL=ajay@verispectai.com
+set SMTP_USER=you@yourdomain.com
+set SMTP_PASS=PASTE_SPACEMAIL_PASSWORD
+set FROM_EMAIL=you@yourdomain.com
 
 cd /d "%~dp0\.."
 python outreach\run.py --enrich --send --cap 40
