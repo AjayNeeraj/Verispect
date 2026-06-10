@@ -218,19 +218,29 @@
   function closeSnap(){document.getElementById('snapModal').classList.remove('on')}
   document.getElementById('snapModal').addEventListener('click',e=>{if(e.target.id==='snapModal')closeSnap()});
 
-  // Lead capture — POSTs to your endpoint. Replace URL with your form/CRM/webhook.
-  const LEAD_ENDPOINT = ''; // e.g. 'https://verispectai.com/api/lead' or a Formspree/webhook URL
+  // Lead capture — wired to Supabase REST (leads table, insert-only via RLS).
+  // The publishable key below is PUBLIC by design (Supabase anon key) — RLS allows INSERT only.
+  const SUPABASE_URL = 'https://zpxpgpwpgugtzpjdxqme.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_lkO_NRmMAtrLEfzOOfUftg_obFWLIaO';
   async function submitSnap(e){
     e.preventDefault();
     const payload = {
       company: document.getElementById('company').value,
       email: document.getElementById('email').value,
       usecase: document.getElementById('usecase').value,
-      source: 'founding-landing', ts: new Date().toISOString()
+      source: 'founding-landing'
     };
     try{
-      if(LEAD_ENDPOINT){ await fetch(LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}); }
-      else { console.log('LEAD (wire LEAD_ENDPOINT):', payload); }
+      await fetch(SUPABASE_URL + '/rest/v1/leads', {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'apikey': SUPABASE_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(payload)
+      });
     }catch(err){ console.error(err); }
     document.querySelector('#snapModal .modal').innerHTML =
       '<h3>✅ On its way.</h3><p>Check your inbox for the one-line setup + your snapshot. Founder (Ajay) will follow up personally. — see you in the Founding 20.</p>';
