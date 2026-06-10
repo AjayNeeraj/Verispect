@@ -6,8 +6,8 @@ import os
 from datetime import datetime, timedelta
 from typing import Optional
 
+import bcrypt
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 from fastapi import HTTPException, Request
 
 # ── Config ────────────────────────────────────────────────────────────────────
@@ -15,16 +15,18 @@ JWT_SECRET    = os.getenv("JWT_SECRET", "change-this-in-production-use-a-long-ra
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRE_DAYS = 30   # tokens last 30 days — dashboard sessions persist
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-# ── Password ──────────────────────────────────────────────────────────────────
+# ── Password (bcrypt directly — passlib is unmaintained and breaks with bcrypt>=4.1)
 
 def hash_password(plain: str) -> str:
-    return pwd_context.hash(plain)
+    # bcrypt operates on max 72 bytes; truncate consistently in hash AND verify
+    return bcrypt.hashpw(plain.encode("utf-8")[:72], bcrypt.gensalt()).decode("utf-8")
 
 
 def verify_password(plain: str, hashed: str) -> bool:
-    return pwd_context.verify(plain, hashed)
+    try:
+        return bcrypt.checkpw(plain.encode("utf-8")[:72], hashed.encode("utf-8"))
+    except ValueError:
+        return False
 
 
 # ── JWT ───────────────────────────────────────────────────────────────────────
