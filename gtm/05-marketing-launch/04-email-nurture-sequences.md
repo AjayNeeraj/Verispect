@@ -18,7 +18,7 @@
 > If you use Helicone/LangSmith — great, keep them. Here's the one thing they can't tell you, and why it matters for your next security review: {link to comparison post}.
 
 **Email 4 (T+10): The artifact**
-> When a buyer asks "prove your AI isn't biased," this is what you send: {sample report}. Pro turns your snapshot into continuous monitoring + monthly reports for €99/mo. Want it on?
+> When a buyer asks "prove your AI isn't biased," this is what you send: {sample report}. Verispect turns your snapshot into continuous monitoring + monthly reports — Founding 20 locks your rate for life. Want it on?
 
 **Email 5 (T+16): Soft close + out**
 > Last one from this thread. If continuous AI monitoring is useful, start free here: {link}. If not, no worries — I'll keep the useful posts coming unless you'd rather I stop {unsub}.

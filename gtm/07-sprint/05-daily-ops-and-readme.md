@@ -40,14 +40,14 @@
 
 ## Weekly management gates
 - **Day 7 review:** If closes < 6 → the *message or targeting* is wrong, not the effort. Fix the offer framing / segment before adding volume. If replies high but closes low → the demo leaks; tighten the call (lead with the report on screen, ask for the close).
-- **Day 10 checkpoint:** If behind, run the contingency in `01` (drop to monthly-first, widen ICP, add the €290 one-time report SKU).
+- **Day 10 checkpoint:** If behind, run the contingency in `01` (drop to monthly-first, widen ICP, add the $2,900 one-time report SKU).
 
 ## The 5 numbers on the wall (nothing else matters)
 **Touches · Snapshots · Demos · Closes · Spots left.** Update daily in the tracker Dashboard. If touches are short, nothing downstream can hit. Outbound volume is the one input you fully control — protect the morning block above all.
 
 ## Close mechanics (turn demo → paid)
 1. Lead the call with their **snapshot result + the report on screen** (proof, not pitch).
-2. Name the offer once, clearly: "€79/mo locked for life, I set it up now, free to cancel, 1 of {N} founding spots."
+2. Name the offer once, clearly: "$1,500/mo locked for life before it rises to $2,500, I set it up now, free to cancel, 1 of {N} founding spots."
 3. **Ask for the close directly:** "Want me to set you up as a founding customer today?" Then silence.
 4. On yes → payment link in chat → book the 30-min white-glove setup.
 5. On "let me think" → "totally — the spots are filling and the price locks only for founders; can I hold one for you for 48h?" (honest soft scarcity).
@@ -65,7 +65,7 @@
 ## After Day 15
 - Bank cash, count ARR, tally logos. Update the financial model.
 - Turn the 20 founding customers into: testimonials, case studies, reference calls, the trust-badge backlinks, and 1 intro each → fuel for the standard-pricing motion in `gtm/02-sales` + `gtm/05-marketing-launch`.
-- Founding 20 full? Open Wave 2 at €89, or switch to public pricing + waitlist. The deadline keeps selling until Aug 2026.
+- Founding 20 full? Open Wave 2 at a higher locked rate ($1,900/mo), or switch to public pricing + waitlist. The deadline keeps selling until Aug 2026.
 
 ---
 

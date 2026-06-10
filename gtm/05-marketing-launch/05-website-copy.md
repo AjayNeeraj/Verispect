@@ -57,7 +57,7 @@
 *(pull tiers from `03-pricing-billing/00`)*
 - Headline: **Compliance evidence, priced for startups.**
 - Sub: Start free. Upgrade when it earns it. Cancel anytime.
-- 4 cards: Free / Pro €99 (Most popular) / Business €399 / Enterprise (Talk to us).
+- 3 cards: Free snapshot / **Verispect $1,500/mo** (Founding — most popular) / Enterprise (talk to us).
 - FAQ: "Does this make me compliant?" → "No tool can — and we won't pretend. Verispect generates the monitoring and bias evidence the law asks for, mapped to the articles, so your team can stand behind it." · "Do you see our data?" → "No. Only hashes and vectors." · "Latency?" → "Zero added." · "Multi-model?" → "OpenAI-compatible today; more on the roadmap — talk to us about design-partner access."
 
 ---

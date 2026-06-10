@@ -15,7 +15,7 @@
 | Email/infra (transactional) | ~€0.05 | ~€0.20 | ~€0.50 | ~€2 |
 | Support (founder time, allocated) | ~€0 | ~€3 | ~€15 | ~€300 |
 | **Est. total COGS/mo** | **~€0.55** | **~€10** | **~€42** | **~€500** |
-| **Price/mo** | €0 | €99 | €399 | ~€4,000 (avg) |
+| **Price/mo** | €0 (snapshot) | $1,500 | $2,500 (post-founding) | custom |
 | **Gross margin** | n/a | **~90%** | **~89%** | **~88%** |
 
 > Note: probe traffic uses the *customer's own* OpenAI key (SDK fires probes client-side), so we don't pay for probe LLM calls — a structural cost advantage. Our compute is embeddings + API, both cheap.
@@ -29,10 +29,10 @@ Margins ~88–90% — characteristic of a software-only, no-LLM-inference-cost S
 | Gross margin | 85%+ | architecture supports it |
 | CAC (Pro, founder-led + content) | < €150 | mostly time; low cash cost |
 | CAC (Enterprise) | < €2,000 | founder time + travel/events |
-| LTV (Pro) | ~€1,800 | €99 × ~18 mo avg life × ~90% margin ≈ €1,600–1,900 |
+| LTV (core plan) | ~$24,000 | $1,500 × ~18 mo avg life × ~90% margin |
 | LTV:CAC (Pro) | > 10:1 | strong (content/founder-led is cash-cheap) |
 | LTV (Enterprise) | ~€100k+ | €4k/mo × 24+ mo × 88% |
-| CAC payback (Pro) | < 2 mo | €99 covers low CAC fast |
+| CAC payback | < 1 mo | one $1,500 month covers founder-led CAC |
 | CAC payback (Enterprise) | < 6 mo | |
 | Logo churn (Pro) | < 4%/mo target | compliance stickiness + audit history lock-in |
 | Net revenue retention | > 110% | expansion via Pro→Business→Enterprise |
@@ -44,8 +44,7 @@ Margins ~88–90% — characteristic of a software-only, no-LLM-inference-cost S
 - Risk: churn spikes if a customer's *use case* sunsets or they get acquired — outside our control; mitigate with multi-use-case expansion.
 
 ## Contribution by tier (illustrative monthly)
-- Pro: €99 − €10 = **€89 contribution** (90%).
-- Business: €399 − €42 = **€357 contribution** (89%).
+- Core plan: $1,500 − ~$150 = **~$1,350 contribution** (~90%).
 - Enterprise: €4,000 − €500 = **€3,500 contribution** (88%).
 
 → One Enterprise account ≈ 40 Pro accounts in contribution. But Pro/Business volume funds discovery, references, and word-of-mouth that source Enterprise. Need both.

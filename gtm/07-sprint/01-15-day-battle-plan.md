@@ -29,7 +29,7 @@ If you hit ~60–80 great touches/day, expect **8–12 closes** (still hits the 
 ## Pre-Sprint (Day 0 — must be done before Day 1)
 - [ ] Free snapshot tool live + tested (the engine of the whole sprint).
 - [ ] Founding-20 campaign page live (`04-campaign-landing-page.md`) with spot counter + Aug 2 countdown.
-- [ ] Billing live — at minimum a Stripe/Paddle payment link for €790/yr and €79/mo (a link is enough; full self-serve can wait).
+- [ ] Billing live — at minimum a payment link (Payoneer invoice / Dodo / Paddle) for $15,000/yr and $1,500/mo (a link is enough; full self-serve can wait).
 - [ ] Sample report PDF + one-pager + badge mockup ready to send.
 - [ ] **Target list: 300+ Tier-1 prospects loaded** (`03-target-list-playbook.md`). This is the day-0 bottleneck — build it first.
 - [ ] Sending infra: warmed email domain (SPF/DKIM/DMARC), LinkedIn ready, calendar booking link.
@@ -92,10 +92,10 @@ If you hit ~60–80 great touches/day, expect **8–12 closes** (still hits the 
 - **Energy management:** this pace is unsustainable past ~15 days by design. It's a sprint. Protect sleep; a foggy founder closes nothing.
 
 ## If we're behind on Day 10 (contingency)
-1. Drop price friction: lead with **€79/mo** (no annual ask) — lower the yes.
+1. Drop friction: lead with **$1,500/mo** (no annual ask) — or offer the one-time $2,900 Readiness Report SKU as the entry.
 2. Widen ICP to Tier-2 + UK + broader GCC.
-3. Add a one-time **"AI Act Readiness Report" SKU at €290** (no subscription commitment) — captures the "just need the document now" buyer; upsell monitoring later.
+3. Add a one-time **"AI Act Readiness Report" SKU at $2,900** (no subscription commitment) — captures the "just need the document now" buyer; upsell monitoring later.
 4. Lean harder on the free snapshot as a no-call self-close.
 
 ## If we hit 20 before Day 15 (good problem)
-Open "Founding 20 — Wave 2" at a slightly higher locked price (€89), or close founding and switch to standard pricing with a waitlist. Scarcity stays real.
+Open "Founding 20 — Wave 2" at a higher locked rate ($1,900/mo), or close founding and move to the public $2,500 with a waitlist. Scarcity stays real.

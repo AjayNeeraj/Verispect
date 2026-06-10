@@ -20,7 +20,7 @@
 - Or fold it into the existing dashboard build under `/founding`.
 
 ### 2. Billing — Stripe Payment Links (NO code, 20 min)
-- Create a Stripe account → **Products** → add "Verispect Founding" with two prices: **€790/yr** and **€79/mo**.
+- Create a Stripe account → **Products** → add "Verispect Founding" with two prices: **$15,000/yr** and **$1,500/mo**.
 - **Payment Links** → create a link for each price → copy the URLs.
 - Paste the annual link into `landing/index.html` → `PAY_LINK` (and into the offer PDF / DMs).
 - That's it — you can take money today. The `billing.py` Checkout/webhook flow is for later self-serve.

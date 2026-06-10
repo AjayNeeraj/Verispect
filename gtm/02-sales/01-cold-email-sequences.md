@@ -81,7 +81,7 @@ Every email footer:
 ### Email 1 — Day 2 after snapshot
 **Subject:** your drift score
 
-> {First}, you ran a Verispect snapshot — your avg drift was {X} with {N} flagged events in {category}. That's worth watching continuously, not once. Pro turns this into ongoing monitoring + monthly auto-reports for €99/mo. Want me to flip it on?
+> {First}, you ran a Verispect snapshot — your avg drift was {X} with {N} flagged events in {category}. That's worth watching continuously, not once. Verispect turns this into continuous monitoring + monthly auto-reports — Founding 20 locks your rate for life. 15-min walkthrough?
 
 ### Email 2 — Day 6
 **Subject:** the {category} flag

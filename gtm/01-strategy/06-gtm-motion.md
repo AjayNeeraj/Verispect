@@ -26,7 +26,7 @@
 
 ## The land → expand path
 
-- **Land:** Free snapshot report (lead magnet) → Pro self-serve (€99/mo) for startups; or Enterprise pilot for regulated scale-ups.
+- **Land:** Free snapshot report (lead magnet) → $1,500/mo subscription (Founding 20 locks the rate for life); Enterprise custom for multi-entity/SLA.
 - **Expand:** more models monitored, more seats, white-label reports, custom probes, SLA → Enterprise tier. Natural expansion trigger = an upcoming audit or a new enterprise customer of *theirs* demanding evidence.
 - **Retain:** the accumulating audit history is the lock-in. Monthly auto-generated report = recurring felt value. Drift alerts = recurring "saved me" moments.
 

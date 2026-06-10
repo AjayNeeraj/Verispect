@@ -20,7 +20,7 @@
 > Here's setup (literally one line): {link}. Takes ~5 min, returns a 2-page readiness report. Once you see it, I'll show you the Founding 20 program — locked-for-life pricing + I set it all up for you. Ping me when it's running.
 
 ### DM 3 — snapshot showed drift/bias
-> Your snapshot flagged {N} events in {category} — that's exactly what an auditor or enterprise buyer probes hardest. The Founding 20 turns this into continuous monitoring + the audit-ready report, €79/mo locked for life (public is €99), I set it up on a 30-min call. 15-min walkthrough first?
+> Your snapshot flagged {N} events in {category} — that's exactly what an auditor or enterprise buyer probes hardest. The Founding 20 turns this into continuous monitoring + the audit-ready report — Founding rate locked for life before it rises, I set it up on a 30-min call. 15-min walkthrough first?
 
 ### DM 4 — no reply (value nudge, day +3)
 > No rush {First} — sharing in case useful: {link to "EU AI Act Art.72 in plain English" post}. The monitoring obligation is the one most teams can't evidence yet. Free snapshot's there whenever; founding spots are filling ({N}/20 left).

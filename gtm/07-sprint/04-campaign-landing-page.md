@@ -36,7 +36,7 @@ The first 20 EU / Singapore / UAE AI teams get:
 - ✅ **Continuous bias & drift monitoring** + monthly auto-report
 - ✅ **White-glove setup** — we integrate the one line *with* you on a 30-min call
 - ✅ **"Verispect Verified — Monitoring Active" badge** for your site
-- ✅ **Founding price locked for life: €79/mo (or €790/yr)** — public price is €99
+- ✅ **Founding rate locked for life: $1,500/mo (or $15,000/yr)** — rises to $2,500 after the Founding 20
 - ✅ **Direct founder line** — Ajay, on Slack, whenever
 
 **Risk reversal:** Run the free snapshot first. Only join if it shows you something worth fixing. Cancel anytime — no lock-in.
@@ -69,4 +69,4 @@ The first 20 EU / Singapore / UAE AI teams get:
 - **Sticky header CTA** on scroll.
 - **Exit intent:** "Not ready? Grab the free EU AI Act readiness checklist" → email capture → nurture.
 - **Social proof bar** updates as founders join ("{Company} just claimed a spot").
-- One payment link (€790/yr default, €79/mo toggle) — frictionless checkout.
+- One payment link ($15,000/yr default, $1,500/mo toggle) — frictionless checkout.

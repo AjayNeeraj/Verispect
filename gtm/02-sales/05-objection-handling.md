@@ -32,7 +32,7 @@
 > "It doesn't make you compliant — no tool can, and anyone who says so is lying. *You* remain the operator. What it does is produce the continuous-monitoring and bias evidence the Act asks for, mapped article-by-article, so a human can stand behind it. It's the evidence engine under your governance, not a rubber stamp."
 
 ### "Too expensive / no budget."
-> "What's the cost of the deal currently stuck in security review? Pro is €99/mo — less than an hour of an ML engineer's time, and it replaces a multi-month internal build. Start free, prove value on your real traffic, upgrade only if it earns it."
+> "What's the cost of the deal stuck in security review — or of fines up to €15M / 3% of turnover? $1,500/mo is a fraction of one consultant week, and it replaces a €50k+ manual readiness project. Run the free snapshot first; only pay if it shows you something worth fixing."
 *Proof:* free tier; ROI framed against the stalled deal, not against a logging tool's price.
 
 ### "Now isn't the right time."
