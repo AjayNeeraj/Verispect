@@ -1,0 +1,25 @@
+# Render deploy for the Verispect backend (FastAPI + serves the committed React dist).
+# Connect the repo at render.com → it reads this. Set DATABASE_URL (Supabase) + OPENAI_API_KEY
+# in the Render dashboard (Environment). The dashboard/dist build is committed, so no Node step.
+#
+# RAM NOTE: the drift scorer loads a sentence-transformer (~1–2 GB once a probe runs).
+# Boot is fine on small instances (model loads lazily), but real probe scoring needs
+# a Standard instance (>=2 GB). Free tier will OOM on first scoring call. Plan ~$25/mo for serving.
+services:
+  - type: web
+    name: verispect
+    runtime: python
+    region: frankfurt          # match Supabase EU data residency
+    plan: standard             # >=2GB for the embedding model; free tier OOMs on scoring
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL      # Supabase Postgres URI (Settings → Database) — set in dashboard
+        sync: false
+      - key: OPENAI_API_KEY    # optional — calibration / LLM doc fill
+        sync: false
+      - key: JWT_SECRET        # signing key for dashboard auth tokens
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: "3.11.9"
