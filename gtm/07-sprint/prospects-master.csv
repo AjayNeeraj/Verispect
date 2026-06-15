@@ -1,0 +1,87 @@
+Tier,Company,Geo,Vertical,LLM use case (personalization hook),Why now / signal,Contact,Title,Email,Status
+A,Maki People,Paris FR,HR-tech,Conversational AI assesses skills & filters candidates,€27.8M Series A; H&M/BNP/PwC clients,,,,Research
+A,HrFlow.ai,Paris FR,HR-tech,Explainable AI scores & prioritizes candidate profiles,€6M pre-A Apr 2026; explainability angle,,,,Research
+A,Dex,London UK,HR-tech,AI matches engineers to roles via ML engine,$5.3M seed Apr 2026 (a16z Speedrun),,,,Research
+A,Carv,Amsterdam NL,HR-tech,AI pre-screens candidates via chat/voice,$10M seed; launched 2024,,,,Research
+A,Empion,Berlin DE,HR-tech,AI robo-advisor matches/ranks candidates,~€9M raised; acquired Zalvus,,,,Research
+A,Retorio,Munich DE,HR-tech,Video AI infers personality to assess fit,€9M Series A; behavioral scoring = high scrutiny,,,,Research
+A,Tengai,Stockholm SE,HR-tech,AI interview avatar screens candidates unbiased,Brand = unbiased; needs evidence,,,,Research
+A,Vinter,London UK,HR-tech,AI evaluates candidates across tasks & video,€1.4M seed; 'bias-free' positioning,,,,Research
+B,Alva Labs,Stockholm SE,HR-tech,AI psychometric tests predict candidate fit,$14.2M Series A (VNV Global),,,,Research
+B,Sapia.ai,London UK (ops),HR-tech,Chat AI interviews score & shortlist candidates,10M+ interviews; HQ AU - flag,,,,Research
+B,Applied,London UK,HR-tech,Debiased task-based candidate assessments,BIT spin-out; public RAI claim,,,,Research
+B,Maki/Neobrain,Paris FR,HR-tech,AI maps skills & assesses employees for mobility,€20M Series A (Breega),,,,Research
+B,AssessFirst,Paris FR,HR-tech,AI predicts candidate potential,3500+ companies 40+ countries,,,,Research
+B,Orbio,Madrid ES,HR-tech,Autonomous AI agents run screening end-to-end,€6.4M raised; founded 2025,,,,Research
+B,Wrksense,Dublin IE,HR-tech,Full AI recruiter screens/evaluates candidates,Targets orgs hiring 200+/yr,,,,Research
+B,HrFlow/Carv tier,Rotterdam NL,HR-tech,AI matching students/pros to employers (Magnet.me),400k+ professionals,,,,Research
+B,TestGorilla,Amsterdam NL,HR-tech,AI skills assessments + resume scoring,Large skills-test library,,,,Research
+B,Globus.ai,Oslo NO,HR-tech,AI matches & books healthcare staff,$4.8M seed; 12x growth,,,,Research
+C,Beamery,London UK,HR-tech,AI infers skills to match/rank talent,Enterprise clients; runs large,,,,Research
+C,HeyJobs,Berlin DE,HR-tech,ML matching scores candidate shortlists,$59M raised; runs large,,,,Research
+C,Job&Talent,Madrid ES,HR-tech,ML automates blue-collar hiring/matching,One of EU's largest; runs large,,,,Research
+A,Taktile,Berlin DE,Fintech,AI credit/risk underwriting decision platform,$54M Series B Feb 2025; 24 markets,,,,Research
+A,Banxware,Berlin DE,Fintech,AI underwriting for embedded SME lending,€10M from UniCredit Jun 2025,,,,Research
+A,Karmen,Paris FR,Fintech,AI credit-risk scoring for revenue-based finance,$9.4M Jan 2025 (Bpifrance),,,,Research
+A,Defacto,Paris FR,Fintech,Automated AI credit decisioning for SME lending,€16M; €167M Citi facility,,,,Research
+A,Mifundo,Tallinn EE,Fintech,AI cross-border credit scoring,€10M EIC Sep 2024; EU credit-passport,,,,Research
+A,Plend,London UK,Fintech,Open-banking + AI affordability/credit scoring,£40M seed; ClearScore partnership,,,,Research
+A,Baobab Insurance,Berlin DE,Insurtech,AI-native cyber-risk underwriting,€12M Series A Jun 2025,,,,Research
+A,Qantev,Paris FR,Insurtech,AI claims platform for health/life insurers,€30M Oct 2024 (Blossom),,,,Research
+A,Sprout.ai,London UK,Insurtech,GenAI/LLM claims assessment automation,£5.4M; patented LLM claims tech,,,,Research
+A,ClaimSorted,London UK,Insurtech,AI claims-handling automation (TPA),€11.4M seed Oct 2025,,,,Research
+B,SME Finance,Vilnius LT,Fintech,AI lending decisions for SMEs <1hr,€40M InvestEU/EIF facility,,,,Research
+B,Creamfinance,Warsaw PL,Fintech,ML consumer credit scoring on alt-data,5-market scoring engine,,,,Research
+B,Bdeo,Madrid ES,Insurtech,AI visual intelligence for motor claims,>50% Spanish motor underwriting,,,,Research
+B,Cleverea,Barcelona ES,Insurtech,ML underwriting & fraud (neo-insurer),€5M seed (Stride),,,,Research
+B,omni:us,Berlin DE,Insurtech,AI end-to-end claims automation,Wurttembergische partnership,,,,Research
+B,MarvelX,Amsterdam NL,Insurtech,AI claims/workflow automation + fraud,€5.4M (EQT Ventures) May 2025,,,,Research
+B,Monto (Capcito),Stockholm SE,Fintech,Real-time AI scoring for SME credit,Powers SME lender decisions,,,,Research
+B,INSRD,Berlin DE,Insurtech,Industry AI for SME risk/underwriting,€500k pre-seed; early fit,,,,Research
+B,Elucidate,Berlin DE,Fintech,ML financial-crime risk scoring for FIs,~€8M Series A; regulated FIs,,,,Research
+B,Surebird,Amsterdam NL,Insurtech,AI insurance underwriting/ops automation,Recent funding; early-stage,,,,Research
+C,Akur8,Paris FR,Insurtech,ML actuarial pricing & reserving,$120M Series C; 300+ insurers,,,,Research
+C,Descartes Underwriting,Paris FR,Insurtech,AI parametric risk underwriting,$120M Series B; Generali,,,,Research
+C,Abound,London UK,Fintech,AI cashflow underwriting on Open Banking,£250M Deutsche Bank facility,,,,Research
+A,Robin AI,London UK,Legal-tech,LLM contract review (2M+ contracts),$26M Series B+ Nov 2024,,,,Research
+A,Genie AI,London UK,Legal-tech,LLM drafting + review of legal docs,$17.8M Series A (GV) Oct 2024,,,,Research
+A,Leya,Stockholm SE,Legal-tech,LLM assistant review/search/drafting,$25M Series A (Redpoint); 70+ firms,,,,Research
+A,Garfield AI,London UK,Legal-tech,LLM litigation assistant (debt recovery),First SRA-authorised AI law firm 2025,,,,Research
+A,Noxtua,Berlin DE,Legal-tech,Sovereign legal LLM (German law),€80.7M Series B (C.H. Beck),,,,Research
+B,Definely,London UK,Legal-tech,AI contract drafting/review (Cascade),Magic Circle clients,,,,Research
+B,Luminance,Cambridge UK,Legal-tech,Proprietary LLM contract review,$75M Series C; runs large,,,,Research
+B,LawX,Berlin DE,Legal-tech,AI OS / back-office layer for legal,€7.5M (Motive Partners),,,,Research
+B,Tomorro,Paris FR,Legal-tech,AI contract drafting/negotiation (CLM),France Legaltech program,,,,Research
+B,Saga,Amsterdam NL,Legal-tech,Agentic LLM legal work assistants,€1.5M+ seed Oct 2025,,,,Research
+B,Henchman,Ghent BE,Legal-tech,GPT contract drafting/clause retrieval,Acquired by LexisNexis Jun 2024,,,,Research
+B,Brightflag,Dublin IE,Legal-tech,AI legal-spend analysis & matter classification,NLP on legal data; Series A+,,,,Research
+A,TORTUS AI,London UK,Health-tech,GenAI ambient clinical scribe,Largest NHS AI-scribe trial 2025,,,,Research
+A,Anima Health,London UK,Health-tech,AI clinical triage & care-navigation,$12M Series A (Molten); 300+ NHS practices,,,,Research
+A,Corti,Copenhagen DK,Health-tech,Clinical-reasoning LLM for consultations,Launched FactsR agentic reasoning Jun 2025,,,,Research
+B,Visiba Care,Gothenburg SE,Health-tech,AI symptom triage (CE-marked device),Deployed in NHS 111,,,,Research
+B,Klinik,Helsinki FI,Health-tech,AI total-triage 1000+ symptoms,CE-marked; EU+UK expansion,,,,Research
+B,Symptoma,Salzburg AT,Health-tech,AI symptom checker 20k+ diseases,In NHS AI-triage landscape,,,,Research
+B,Mediktor,Barcelona ES,Health-tech,LLM conversational digital triage,Clinically validated LLM triage,,,,Research
+B,Quibim,Valencia ES,Health-tech,AI radiology/imaging biomarkers,$50M Series A; 170+ installations,,,,Research
+A,X0PA AI,Singapore,HR-tech,AI screens/ranks/scores candidates,Endorsed by SG AI Verify; Samsung/gov clients,,,,Research
+A,finbots.ai,Singapore,Fintech,creditX AI builds credit-risk scorecards,MAS Veritas + AI Verify; digital-bank client,,,,Research
+A,Tabby,Dubai UAE,Fintech,Real-time AI underwriting at checkout (BNPL),$160M Series E at $3.3B; IPO underway,,,,Research
+A,Bayzat,Dubai UAE,HR-tech,HR/payroll AI + anomaly detection,$60M+ (Point72/Mubadala); 4000+ companies,,,,Research
+A,Igloo,Singapore,Insurtech,Real-time risk + AI underwriting/claims,~$100M raised; AI-native by 2026; Tokio Marine,,,,Research
+A,NymCard,Abu Dhabi UAE,Fintech,AI credit decisioning + loan servicing,Central Bank UAE licensed; MENA embedded lending,,,,Research
+A,Tamara,Riyadh SA,Fintech,Shariah BNPL credit/risk decisioning,$2.4B facility (Goldman/Citi/Apollo); 20M customers,,,,Research
+B,HireQuotient,Singapore,HR-tech,AI recruiting OS: sourcing/assessment/video scoring,Growth-stage; agentic recruiting,,,,Research
+B,Fuku AI,Singapore,HR-tech,AI sources/screens/evaluates interviews,Recently launched in SG,,,,Research
+B,CredoLab,Singapore,Fintech,Credit scorecards from smartphone metadata,50+ lenders 15 countries; Visa/CIMB,,,,Research
+B,Trusting Social,Singapore,Fintech,AI credit scores from alt-data,Sequoia/Tencent-backed,,,,Research
+B,LenddoEFL,Singapore,Fintech,AI/behavioral-data credit scoring,5M+ assessments; $2B+ disbursed,,,,Research
+B,Funding Societies,Singapore,Fintech,AI credit models underwrite SME loans,SE Asia's largest SME lender; $4B+,,,,Research
+B,Aspire,Singapore,Fintech,Aspire AI + ML credit decisioning,Launched Aspire AI; Singlife partner,,,,Research
+B,Beehive,Dubai UAE,Fintech,AI + alt-data SME borrower scoring,e& majority stake; DFSA-regulated,,,,Research
+B,Lendo,Riyadh SA,Fintech,AI screens SME borrowers (debt crowdfunding),~$740M financing 2025,,,,Research
+B,Tookitaki,Singapore,Fintech,AI risk engine for AML/KYC due diligence,MAS-aligned; enterprise banks,,,,Research
+B,Cynopsis,Singapore,Fintech,AI KYC/AML + identity screening,Regulated-FI base across APAC,,,,Research
+B,Bolttech,Singapore,Insurtech,AI/ML embedded insurance risk/claims,Insurtech unicorn; global insurers,,,,Research
+B,Hala (Addenda),Abu Dhabi UAE,Insurtech,AI/ML motor underwriting & pricing,$5M (Mubadala); ADGM-licensed,,,,Research
+B,Yallacompare,Dubai UAE,Insurtech,Engine matches users to insurance/loans,$9M+; regulated marketplace,,,,Research
+C,Anyfin,Stockholm SE,Fintech,AI consumer loan refinancing/assessment,Multi-market; ~205 staff,,,,Research

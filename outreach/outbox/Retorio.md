@@ -6,7 +6,7 @@
 
 **Subject:** ai act · Retorio
 
-Retorio's LLM for AI video interview / behavioral scoring is high-risk under the EU AI Act (live Aug 2026), and providers change models with no changelog.
+Retorio's LLM for your LLM-driven decisions is high-risk under the EU AI Act (live Aug 2026), and providers change models with no changelog.
 Verispect proves yours isn't drifting/biased in 1 line of code — we never see your data.
 Free 5-min snapshot of your model? https://verispectai.com/founding
 
@@ -14,9 +14,9 @@ Free 5-min snapshot of your model? https://verispectai.com/founding
 
 ## LINKEDIN — connect note
 
-Retorio runs LLMs in AI video interview / behavioral scoring; that's high-risk under the EU AI Act from Aug 2026. Built Verispect to prove a model isn't biased/drifting in 1 line (we never see your data). Worth connecting?
+Retorio runs LLMs in your LLM-driven decisions; that's high-risk under the EU AI Act from Aug 2026. Built Verispect to prove a model isn't biased/drifting in 1 line (we never see your data). Worth connecting?
 
 ## LINKEDIN — DM after accept
 
-thanks! quick + real: Aug 2026 the AI Act needs your AI video interview / behavioral scoring model to prove no bias/drift. Verispect does it in one line, we never see your data.
+thanks! quick + real: Aug 2026 the AI Act needs your your LLM-driven decisions model to prove no bias/drift. Verispect does it in one line, we never see your data.
 free 5-min snapshot of Retorio's model? just your real numbers, no pitch.
