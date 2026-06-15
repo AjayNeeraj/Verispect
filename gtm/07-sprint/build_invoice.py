@@ -8,6 +8,11 @@ Usage:
 Plans: founding-monthly ($1,500) | founding-annual ($15,000) | starter ($490) | readiness-report ($2,900)
 """
 import argparse, datetime, os
+try:
+    from dotenv import load_dotenv
+    load_dotenv(os.path.join(os.path.dirname(__file__), "..", "..", ".env"))
+except Exception:
+    pass
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -29,20 +34,18 @@ PLANS = {
     "design-partner":     ("Verispect Design Partner — 6 months", "Design partnership: full monitoring + reports, EUR0, in exchange for logo + testimonial + reference + production traffic", 0.0, "6 months"),
 }
 
-# ── Your business details — FILL THESE ONCE ─────────────────────────────────
+# ── Business + payment details — READ FROM .env (gitignored, never committed) ──
+# Set these in the project-root .env so they never land in the public repo:
+#   SELLER_NAME, SELLER_ADDR, SELLER_EMAIL, SELLER_TAX, PAYONEER_DETAILS
 SELLER = {
-    "name": "[Your registered name / Verispect]",
-    "addr": "[Your address, City, Pakistan]",
-    "email": "billing@verispectai.com",
-    "tax": "[Your tax/NTN number if applicable]",
+    "name":  os.getenv("SELLER_NAME",  "[set SELLER_NAME in .env]"),
+    "addr":  os.getenv("SELLER_ADDR",  "[set SELLER_ADDR in .env]"),
+    "email": os.getenv("SELLER_EMAIL", "billing@verispectai.com"),
+    "tax":   os.getenv("SELLER_TAX",   ""),
 }
-# Payment instructions shown on the invoice. Fill with your real Payoneer details.
-PAY_INSTRUCTIONS = (
-    "Pay by bank transfer to the Payoneer receiving account below (USD). "
-    "Reference the invoice number. Or request a card payment link.\n"
-    "Payoneer (USD): Bank [____]  ·  Account holder [____]  ·  Account no. [____]  ·  "
-    "Routing/SWIFT [____]\nQuestions: billing@verispectai.com"
-)
+PAY_INSTRUCTIONS = os.getenv("PAYONEER_DETAILS",
+    "Pay by bank transfer to our Payoneer USD receiving account (details on request), "
+    "referencing the invoice number, or request a card payment link. billing@verispectai.com")
 
 def make_doc(path):
     frame = Frame(1.9*cm, 2.2*cm, W-3.8*cm, H-4.6*cm, id="b")
