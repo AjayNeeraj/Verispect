@@ -60,3 +60,14 @@ gtm/07-sprint/prospects-master.csv
 outreach/outbox/
 outreach/sent_log.csv
 outreach/state.json
+
+# Non-product (keep local, off GitHub): docs, collateral, internal tooling, dev cruft
+gtm/
+outreach/
+OneDrive/
+CONTEXT.md
+DEPLOY.md
+HEALTH_CHECK.md
+test.py
+check_api.py
+dashboard.py
