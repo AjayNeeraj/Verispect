@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom'
-import { getMetrics, getLogs, getDriftEvents, getDriftTimeline, getComplianceSummary, downloadReport } from './api'
-import { isLoggedIn, getUser, logout } from './auth'
+import { getMetrics, getLogs, getDriftEvents, getDriftTimeline, getComplianceSummary } from './api'
+import { isLoggedIn, logout } from './auth'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer } from 'recharts'
 import Login    from './pages/Login'
 import Register from './pages/Register'
 import Account  from './pages/Account'
+import RiskClassifier from './pages/RiskClassifier'
+import AuditPack      from './pages/AuditPack'
 import './index.css'
 
 // ── Route guard ───────────────────────────────────────────────────────────────
@@ -102,6 +104,8 @@ export default function App() {
       <Route path="/login"    element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/account"  element={<Protected><Account /></Protected>} />
+      <Route path="/risk"     element={<Protected><RiskClassifier /></Protected>} />
+      <Route path="/audit"    element={<Protected><AuditPack /></Protected>} />
       <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />
       <Route path="/" element={<Navigate to={isLoggedIn() ? '/dashboard' : '/login'} replace />} />
       <Route path="*" element={<Navigate to={isLoggedIn() ? '/dashboard' : '/login'} replace />} />
@@ -168,16 +172,22 @@ function Dashboard() {
             <div className="status-dot"></div>
             Live Monitoring
           </div>
-          <button
-            onClick={() => downloadReport(getUser()?.company_name)}
-            style={{
-              background: 'linear-gradient(135deg, #7c6eff 0%, #a78bfa 100%)',
-              color: 'white', border: 'none', borderRadius: '8px',
-              padding: '8px 16px', fontSize: '13px', fontWeight: '600', cursor: 'pointer',
-            }}
-          >
-            📄 Report
-          </button>
+          <Link to="/risk" style={{
+            background: 'rgba(124,110,255,0.15)', color: '#a78bfa',
+            border: '1px solid rgba(124,110,255,0.3)', borderRadius: '8px',
+            padding: '7px 14px', fontSize: '13px', fontWeight: '600',
+            textDecoration: 'none',
+          }}>
+            🛡️ Risk Classifier
+          </Link>
+          <Link to="/audit" style={{
+            background: 'rgba(124,110,255,0.15)', color: '#a78bfa',
+            border: '1px solid rgba(124,110,255,0.3)', borderRadius: '8px',
+            padding: '7px 14px', fontSize: '13px', fontWeight: '600',
+            textDecoration: 'none',
+          }}>
+            📦 Audit Pack
+          </Link>
           <Link to="/account" style={{
             background: 'rgba(124,110,255,0.15)', color: '#a78bfa',
             border: '1px solid rgba(124,110,255,0.3)', borderRadius: '8px',
