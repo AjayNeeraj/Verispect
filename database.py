@@ -51,6 +51,17 @@ logs_table = sqlalchemy.Table(
     sqlalchemy.Column("probe_category", sqlalchemy.String),
 )
 
+leads_table = sqlalchemy.Table(
+    "leads",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, autoincrement=True),
+    sqlalchemy.Column("created_at", sqlalchemy.DateTime, server_default=sqlalchemy.func.now()),
+    sqlalchemy.Column("company", sqlalchemy.String),
+    sqlalchemy.Column("email", sqlalchemy.String),
+    sqlalchemy.Column("usecase", sqlalchemy.String),
+    sqlalchemy.Column("source", sqlalchemy.String),
+)
+
 baselines_table = sqlalchemy.Table(
     "baselines",
     metadata,

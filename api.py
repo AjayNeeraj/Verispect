@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request, HTTPException, Depends
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, EmailStr
 from database import (
-    database, logs_table,
+    database, logs_table, leads_table,
     golden_probe_registry,
     save_golden_probe, get_golden_probe,
     get_random_golden_for_client, increment_golden_replay_count,
@@ -719,6 +719,33 @@ async def generate_report(company: str = "", client_id: str = Depends(require_au
         media_type="application/pdf",
         headers={"Content-Disposition": f"attachment; filename={filename}"},
     )
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PUBLIC LEAD CAPTURE  (/api/lead)
+# No auth — funnel posts leads here as an alternative to the Supabase-direct path
+# ═══════════════════════════════════════════════════════════════════════════════
+
+class LeadRequest(BaseModel):
+    company: str = ""
+    email: str
+    usecase: str = ""
+    source: str = ""
+
+
+@router.post("/lead")
+async def capture_lead(body: LeadRequest):
+    email = body.email.strip()
+    if not email:
+        raise HTTPException(status_code=422, detail="email is required")
+
+    await database.execute(leads_table.insert().values(
+        company=body.company.strip(),
+        email=email,
+        usecase=body.usecase.strip(),
+        source=body.source.strip(),
+    ))
+    return {"status": "ok"}
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
