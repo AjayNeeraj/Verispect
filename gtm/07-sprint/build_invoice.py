@@ -24,8 +24,9 @@ W,H=A4
 PLANS = {
     "founding-monthly":   ("Verispect Founding — monthly", "AI Act monitoring + reports (Founding rate, locked for life)", 1500.0, "per month"),
     "founding-annual":    ("Verispect Founding — annual",  "AI Act monitoring + reports, 12 months (Founding rate, locked for life)", 15000.0, "per year"),
-    "starter":            ("Verispect Starter — monthly",  "AI Act monitoring + reports, 1 model, self-serve", 490.0, "per month"),
-    "readiness-report":   ("Verispect AI Act Readiness Report", "One-time risk classification + DPIA + monitoring report", 2900.0, "one-time"),
+    "standard-monthly":   ("Verispect Standard — monthly", "AI Act monitoring + reports (standard rate)", 3000.0, "per month"),
+    "readiness-report":   ("Verispect AI Act Readiness Report", "One-time risk classification + DPIA + monitoring report", 4900.0, "one-time"),
+    "design-partner":     ("Verispect Design Partner — 6 months", "Design partnership: full monitoring + reports, EUR0, in exchange for logo + testimonial + reference + production traffic", 0.0, "6 months"),
 }
 
 # ── Your business details — FILL THESE ONCE ─────────────────────────────────
