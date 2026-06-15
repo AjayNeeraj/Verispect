@@ -54,3 +54,9 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Prospect data with real emails (PII) — keep local, never publish
+gtm/07-sprint/prospects-master.csv
+outreach/outbox/
+outreach/sent_log.csv
+outreach/state.json

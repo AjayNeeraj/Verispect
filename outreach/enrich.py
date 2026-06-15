@@ -51,7 +51,7 @@ def hunter_domain_search(company):
     key = hunter_key()
     if not key:
         return None
-    q = urllib.parse.urlencode({"company": company, "api_key": key, "limit": 25})
+    q = urllib.parse.urlencode({"company": company, "api_key": key, "limit": 10})
     data = _get(f"{HUNTER}/domain-search?{q}")
     if not data or "data" not in data:
         return None
@@ -125,7 +125,7 @@ def enrich_lead(lead):
         lead["Contact (RESEARCH)"] = f"{res.get('first','')} {res.get('last','')}".strip()
     if res.get("position"):
         lead["Title"] = res["position"]
-    print(f"  [enrich] {company}: {email} ({res.get('position') or 'contact'}) ✓verified")
+    print(f"  [enrich] {company}: {email} ({res.get('position') or 'contact'}) [verified]")
     return True
 
 
