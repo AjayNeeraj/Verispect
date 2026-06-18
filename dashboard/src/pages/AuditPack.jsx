@@ -7,7 +7,7 @@ function NavHeader() {
   return (
     <div className="app-header">
       <Link to="/dashboard" className="app-header-logo" style={{ textDecoration: 'none' }}>
-        <span>⚡</span> Verispect
+        <img src="/logo-full.svg" alt="Verispect" height="34" style={{display:'block'}}/>
       </Link>
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <Link to="/dashboard" style={navLinkStyle}>Dashboard</Link>

@@ -27,7 +27,7 @@ export default function Login() {
   return (
     <div style={styles.page}>
       <div style={styles.card}>
-        <div style={styles.logo}>⚡ Verispect</div>
+        <img src="/logo-full.svg" alt="Verispect" height="36" style={{display:'block',margin:'0 auto 8px'}}/>
         <div style={styles.subtitle}>Sign in to your account</div>
 
         {error && <div style={styles.error}>{error}</div>}

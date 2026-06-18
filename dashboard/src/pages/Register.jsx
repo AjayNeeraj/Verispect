@@ -34,7 +34,7 @@ export default function Register() {
     return (
       <div style={styles.page}>
         <div style={{ ...styles.card, maxWidth: '480px' }}>
-          <div style={styles.logo}>⚡ Verispect</div>
+          <img src="/logo-full.svg" alt="Verispect" height="36" style={{display:'block',margin:'0 auto 8px'}}/>
           <div style={{ ...styles.subtitle, color: '#10b981', fontSize: '16px', fontWeight: '600' }}>
             Account created!
           </div>

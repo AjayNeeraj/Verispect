@@ -54,7 +54,7 @@ export default function Account() {
     <div style={styles.page}>
       {/* Header */}
       <div style={styles.header}>
-        <Link to="/dashboard" style={styles.logo}>⚡ Verispect</Link>
+        <Link to="/dashboard" style={styles.logo}><img src="/logo-full.svg" alt="Verispect" height="32" style={{display:'block'}}/></Link>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
           <Link to="/dashboard" style={styles.navLink}>Dashboard</Link>
           <button onClick={logout} style={styles.logoutBtn}>Sign Out</button>

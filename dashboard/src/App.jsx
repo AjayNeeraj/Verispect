@@ -165,7 +165,7 @@ function Dashboard() {
       {/* Header */}
       <div className="app-header">
         <div className="app-header-logo">
-          <span>⚡</span> Verispect
+          <img src="/logo-full.svg" alt="Verispect" height="34" style={{display:'block'}}/>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div className="app-header-status">
