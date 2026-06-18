@@ -9,6 +9,7 @@ sentence-transformers==3.0.1
 numpy==2.4.4
 asyncpg==0.30.0
 reportlab==4.2.4
+svglib==1.5.1
 python-jose[cryptography]==3.3.0
 bcrypt==5.0.0
 email-validator==2.2.0
