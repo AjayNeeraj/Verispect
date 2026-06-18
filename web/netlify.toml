@@ -1,0 +1,7 @@
+# Deploy the Verispect Next.js site.
+# Option A (repo-connected): set Netlify "base directory" = web, it reads this.
+# Option B (drag-drop): just drag the web/out folder to app.netlify.com/drop.
+[build]
+  base = "web"
+  command = "npm install && npm run build"
+  publish = "out"
