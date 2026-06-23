@@ -10,8 +10,21 @@ import bcrypt
 from jose import JWTError, jwt
 from fastapi import HTTPException, Request
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except Exception:
+    pass
+
 # ── Config ────────────────────────────────────────────────────────────────────
-JWT_SECRET    = os.getenv("JWT_SECRET", "change-this-in-production-use-a-long-random-string")
+_INSECURE_DEFAULT = "change-this-in-production-use-a-long-random-string"
+JWT_SECRET = os.getenv("JWT_SECRET", "")
+if not JWT_SECRET or JWT_SECRET == _INSECURE_DEFAULT:
+    raise RuntimeError(
+        "JWT_SECRET is not set (or is the insecure placeholder). Refusing to start with a "
+        "guessable token-signing key — anyone reading the repo could forge auth tokens. "
+        "Set JWT_SECRET to a long random value, e.g.  export JWT_SECRET=$(openssl rand -hex 32)"
+    )
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRE_DAYS = 30   # tokens last 30 days — dashboard sessions persist
 

@@ -12,7 +12,8 @@ Optional LLM polish if OPENAI_API_KEY is set (drafts richer prose).
 Wire into FastAPI:  app.include_router(doc_router)
 """
 import os, io
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Depends
+from auth import require_auth
 
 doc_router = APIRouter(prefix="/api/docs")
 
@@ -23,22 +24,22 @@ CATEGORY_LABELS = {
 }
 
 
-async def gather_monitoring_summary():
+async def gather_monitoring_summary(client_id: str):
     """Pull real metrics from the logs table (same source as the compliance report)."""
     import sqlalchemy
     from database import database, logs_table
     async def val(q):
         return await database.fetch_val(q)
-    total_calls = await val(sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(logs_table.c.is_canary == 0)) or 0
-    total_probes = await val(sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(logs_table.c.is_canary == 1)) or 0
-    total_flagged = await val(sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(logs_table.c.flagged == 1)) or 0
-    avg_drift = await val(sqlalchemy.select(sqlalchemy.func.avg(logs_table.c.drift_score)).where(logs_table.c.is_canary == 1)) or 0.0
+    total_calls = await val(sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 0))) or 0
+    total_probes = await val(sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 1))) or 0
+    total_flagged = await val(sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.flagged == 1))) or 0
+    avg_drift = await val(sqlalchemy.select(sqlalchemy.func.avg(logs_table.c.drift_score)).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 1))) or 0.0
     cat_q = sqlalchemy.select(
         logs_table.c.probe_category,
         sqlalchemy.func.count().label("run"),
         sqlalchemy.func.sum(logs_table.c.flagged).label("flagged"),
         sqlalchemy.func.avg(logs_table.c.drift_score).label("avg"),
-    ).where(sqlalchemy.and_(logs_table.c.is_canary == 1, logs_table.c.probe_category.isnot(None))).group_by(logs_table.c.probe_category)
+    ).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 1, logs_table.c.probe_category.isnot(None))).group_by(logs_table.c.probe_category)
     cats = []
     for row in await database.fetch_all(cat_q):
         r = dict(row)
@@ -204,9 +205,9 @@ def build_dpia_pdf(ctx: dict) -> bytes:
 
 
 @doc_router.post("/dpia")
-async def generate_dpia(request: Request):
+async def generate_dpia(request: Request, client_id: str = Depends(require_auth)):
     body = await request.json()
-    summary = await gather_monitoring_summary()
+    summary = await gather_monitoring_summary(client_id)
     ctx = {"company": body.get("company", "Confidential"),
            "system_name": body.get("system_name", "AI Decision System"),
            "purpose": body.get("purpose", "automated decision support"),
@@ -223,7 +224,7 @@ if __name__ == "__main__":
     from database import database
     async def main():
         await database.connect()
-        summary = await gather_monitoring_summary()
+        summary = await gather_monitoring_summary("demo")
         ctx = {"company": "Acme HR GmbH (DEMO)", "system_name": "CandidateRank AI",
                "purpose": "automated candidate screening and ranking", "model": "gpt-4o-mini",
                "monitoring": summary, "use_llm": False}

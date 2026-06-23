@@ -16,6 +16,13 @@ import io
 
 risk_router = APIRouter(prefix="/api/risk")
 
+# NOTE — INTENTIONALLY PUBLIC (no auth):
+# /api/risk/questions and /api/risk/classify are stateless lead-generation endpoints.
+# They take a short questionnaire and return a rules-based classification. They touch
+# NO database, NO customer data, and NO secrets — pure compute. This is the public
+# "am I high-risk?" funnel hook. (Contrast: /api/docs/dpia is auth-protected because it
+# reads tenant monitoring data.) Add rate limiting at the edge/proxy if abuse appears.
+
 # ── Annex III high-risk categories (questionnaire keys -> category) ───────────
 ANNEX_III = {
     "hiring":      ("Annex III §4 — Employment, recruitment, worker management",
