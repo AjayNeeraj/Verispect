@@ -917,7 +917,7 @@ async def sdk_ingest(request: Request):
 
     Raw prompt text is NEVER sent here — only hashes and embedding vectors.
     """
-    client_id = _get_client_id(request)
+    client_id = await _get_client_id(request)
     body = await request.json()
 
     prompt_hash = body.get("prompt_hash", "")
@@ -971,7 +971,7 @@ async def sdk_get_probe(request: Request, model: str = "unknown"):
     30% chance: golden probe (client's own historical prompt to replay).
     Falls back to regulatory if no golden probes exist for this client.
     """
-    client_id = _get_client_id(request)
+    client_id = await _get_client_id(request)
 
     # Decide probe type
     use_golden = random.random() < 0.30
@@ -1016,7 +1016,7 @@ async def sdk_probe_result(request: Request):
     """
     from scorer import score_drift, score_drift_from_embeddings
 
-    client_id = _get_client_id(request)
+    client_id = await _get_client_id(request)
     body = await request.json()
 
     probe_id = body.get("probe_id", "")
