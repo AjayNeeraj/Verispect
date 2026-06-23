@@ -1,6 +1,7 @@
 "use client";
 
-import { Container, Section, Eyebrow, Gradient, Reveal, Stagger, Item, SpotlightCard } from "./ui";
+import { Container, Section, Eyebrow, Gradient } from "./ui";
+import { Reveal, Stagger, Item, ConicCard } from "./fx";
 import { CAPABILITIES } from "@/lib/site";
 
 const steps = [
@@ -51,11 +52,11 @@ export function Transformation() {
         <Stagger className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {CAPABILITIES.map((c) => (
             <Item key={c.title}>
-              <SpotlightCard className="h-full">
+              <ConicCard className="h-full">
                 <div className="mb-3 h-8 w-8 rounded-lg bg-brand-gradient opacity-90" />
                 <h4 className="font-semibold">{c.title}</h4>
                 <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">{c.body}</p>
-              </SpotlightCard>
+              </ConicCard>
             </Item>
           ))}
         </Stagger>

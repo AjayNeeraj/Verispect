@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Container, Section, Eyebrow, Reveal } from "./ui";
+import type { ReactNode } from "react";
+import { Container, Section, Eyebrow } from "./ui";
+import { Reveal, CountUp } from "./fx";
 
 export function CaseStudy() {
   return (
@@ -27,9 +29,9 @@ export function CaseStudy() {
             </p>
 
             <div className="mt-8 grid grid-cols-3 gap-4">
-              <Stat n="0.74" l="similarity (medium)" />
-              <Stat n="8" l="protected categories" />
-              <Stat n="100%" l="reproducible scores" />
+              <Stat n={<CountUp to={0.74} decimals={2} />} l="similarity (medium)" />
+              <Stat n={<CountUp to={8} />} l="protected categories" />
+              <Stat n={<CountUp to={100} suffix="%" />} l="reproducible scores" />
             </div>
           </Reveal>
 
@@ -56,7 +58,7 @@ export function CaseStudy() {
   );
 }
 
-function Stat({ n, l }: { n: string; l: string }) {
+function Stat({ n, l }: { n: ReactNode; l: string }) {
   return (
     <div>
       <div className="text-3xl font-semibold text-gradient">{n}</div>

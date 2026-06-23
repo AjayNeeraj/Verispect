@@ -1,6 +1,7 @@
 "use client";
 
-import { Container, Section, Eyebrow, Reveal, Stagger, Item, SpotlightCard } from "./ui";
+import { Container, Section, Eyebrow } from "./ui";
+import { Reveal, Stagger, Item, ConicCard } from "./fx";
 
 const pains = [
   {
@@ -43,11 +44,11 @@ export function Struggle() {
         <Stagger className="mt-14 grid gap-5 md:grid-cols-2">
           {pains.map((p) => (
             <Item key={p.k}>
-              <SpotlightCard className="h-full">
+              <ConicCard className="h-full">
                 <span className="font-mono text-sm text-brand-light">{p.k}</span>
                 <h3 className="mt-3 text-xl font-semibold">{p.t}</h3>
                 <p className="mt-2.5 leading-relaxed text-ink-muted">{p.b}</p>
-              </SpotlightCard>
+              </ConicCard>
             </Item>
           ))}
         </Stagger>

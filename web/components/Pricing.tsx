@@ -1,6 +1,7 @@
 "use client";
 
-import { Container, Section, Eyebrow, Gradient, Reveal, Stagger, Item, Button, Arrow, openLead } from "./ui";
+import { Container, Section, Eyebrow, Gradient, Button, Arrow, openLead } from "./ui";
+import { Reveal, Stagger, Item } from "./fx";
 import { PRICING } from "@/lib/site";
 
 function Check() {
