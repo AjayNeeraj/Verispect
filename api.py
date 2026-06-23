@@ -31,19 +31,19 @@ sdk_router = APIRouter(prefix="/api/sdk")
 @router.get("/metrics")
 async def get_metrics(client_id: str = Depends(require_auth)):
     # Total calls (real)
-    q1 = sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(logs_table.c.is_canary == 0)
+    q1 = sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 0))
     total_calls = await database.fetch_val(q1)
 
     # Total probes
-    q2 = sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(logs_table.c.is_canary == 1)
+    q2 = sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 1))
     total_probes = await database.fetch_val(q2)
 
     # Total flagged
-    q3 = sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(logs_table.c.flagged == 1)
+    q3 = sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.flagged == 1))
     total_flagged = await database.fetch_val(q3)
 
     # Avg drift
-    q4 = sqlalchemy.select(sqlalchemy.func.avg(logs_table.c.drift_score)).where(logs_table.c.is_canary == 1)
+    q4 = sqlalchemy.select(sqlalchemy.func.avg(logs_table.c.drift_score)).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 1))
     avg_drift = await database.fetch_val(q4) or 0
 
     return {
@@ -55,13 +55,13 @@ async def get_metrics(client_id: str = Depends(require_auth)):
 
 @router.get("/logs")
 async def get_logs(client_id: str = Depends(require_auth)):
-    query = logs_table.select().order_by(logs_table.c.created_at.desc()).limit(100)
+    query = logs_table.select().where(logs_table.c.client_id == client_id).order_by(logs_table.c.created_at.desc()).limit(100)
     rows = await database.fetch_all(query)
     return [dict(row) for row in rows]
 
 @router.get("/drift-events")
 async def get_drift_events(client_id: str = Depends(require_auth)):
-    query = logs_table.select().where(logs_table.c.flagged == 1).order_by(logs_table.c.created_at.desc())
+    query = logs_table.select().where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.flagged == 1)).order_by(logs_table.c.created_at.desc())
     rows = await database.fetch_all(query)
     return [dict(row) for row in rows]
 
@@ -75,7 +75,7 @@ async def get_drift_timeline(client_id: str = Depends(require_auth)):
         logs_table.c.severity, 
         logs_table.c.probe_category
     ).where(
-        sqlalchemy.and_(logs_table.c.is_canary == 1, logs_table.c.drift_score.isnot(None))
+        sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 1, logs_table.c.drift_score.isnot(None))
     ).order_by(logs_table.c.created_at.asc())
     
     rows = await database.fetch_all(query)
@@ -90,7 +90,7 @@ async def get_compliance_summary(client_id: str = Depends(require_auth)):
         sqlalchemy.func.sum(logs_table.c.flagged).label("flagged"),
         sqlalchemy.func.avg(logs_table.c.drift_score).label("avg_drift")
     ).where(
-        sqlalchemy.and_(logs_table.c.is_canary == 1, logs_table.c.probe_category.isnot(None))
+        sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 1, logs_table.c.probe_category.isnot(None))
     ).group_by(logs_table.c.probe_category)
 
     rows = await database.fetch_all(query_cat)
@@ -115,7 +115,7 @@ async def get_compliance_summary(client_id: str = Depends(require_auth)):
         compliance_score = None
 
     # Last probe timestamp
-    query_last = sqlalchemy.select(sqlalchemy.func.max(logs_table.c.created_at)).where(logs_table.c.is_canary == 1)
+    query_last = sqlalchemy.select(sqlalchemy.func.max(logs_table.c.created_at)).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 1))
     last_probe = await database.fetch_val(query_last)
 
     # Severity distribution
@@ -123,7 +123,7 @@ async def get_compliance_summary(client_id: str = Depends(require_auth)):
         logs_table.c.severity, 
         sqlalchemy.func.count().label("count")
     ).where(
-        sqlalchemy.and_(logs_table.c.is_canary == 1, logs_table.c.severity.isnot(None))
+        sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 1, logs_table.c.severity.isnot(None))
     ).group_by(logs_table.c.severity)
     
     severity_rows = await database.fetch_all(query_sev)
@@ -191,16 +191,16 @@ async def generate_report(company: str = "", client_id: str = Depends(require_au
     period_str    = "Last 30 days"
     client_label  = company.strip() if company.strip() else "Confidential"
 
-    q_total = sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(logs_table.c.is_canary == 0)
+    q_total = sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 0))
     total_calls = await database.fetch_val(q_total) or 0
 
-    q_probes = sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(logs_table.c.is_canary == 1)
+    q_probes = sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 1))
     total_probes = await database.fetch_val(q_probes) or 0
 
-    q_flagged = sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(logs_table.c.flagged == 1)
+    q_flagged = sqlalchemy.select(sqlalchemy.func.count()).select_from(logs_table).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.flagged == 1))
     total_flagged = await database.fetch_val(q_flagged) or 0
 
-    q_avg = sqlalchemy.select(sqlalchemy.func.avg(logs_table.c.drift_score)).where(logs_table.c.is_canary == 1)
+    q_avg = sqlalchemy.select(sqlalchemy.func.avg(logs_table.c.drift_score)).where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 1))
     avg_drift = await database.fetch_val(q_avg) or 0.0
 
     compliance_score = (
@@ -214,13 +214,13 @@ async def generate_report(company: str = "", client_id: str = Depends(require_au
         sqlalchemy.func.sum(logs_table.c.flagged).label("flagged"),
         sqlalchemy.func.avg(logs_table.c.drift_score).label("avg_drift"),
     ).where(
-        sqlalchemy.and_(logs_table.c.is_canary == 1, logs_table.c.probe_category.isnot(None))
+        sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.is_canary == 1, logs_table.c.probe_category.isnot(None))
     ).group_by(logs_table.c.probe_category)
     cat_rows = await database.fetch_all(q_cat)
 
     q_events = (
         logs_table.select()
-        .where(logs_table.c.flagged == 1)
+        .where(sqlalchemy.and_(logs_table.c.client_id == client_id, logs_table.c.flagged == 1))
         .order_by(logs_table.c.created_at.desc())
         .limit(15)
     )
@@ -933,6 +933,7 @@ async def sdk_ingest(request: Request):
 
     # Log the real call (is_canary=0, no drift score for real calls)
     await database.execute(logs_table.insert().values(
+        client_id=client_id,
         model=model,
         prompt=prompt_hash,          # Store hash — not raw text
         response=None,               # Never store raw response text from SDK
@@ -1058,6 +1059,7 @@ async def sdk_probe_result(request: Request):
 
     # Log probe result to the main logs table (same as canary probes)
     await database.execute(logs_table.insert().values(
+        client_id=client_id,
         model=model,
         prompt=f"[sdk_probe:{probe_id}]",
         response=response_text if probe_type == "regulatory" else None,

@@ -36,6 +36,7 @@ logs_table = sqlalchemy.Table(
     "logs",
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, autoincrement=True),
+    sqlalchemy.Column("client_id", sqlalchemy.String, index=True),   # tenant isolation — every read filters on this
     sqlalchemy.Column("created_at", sqlalchemy.DateTime, server_default=sqlalchemy.func.now()),
     sqlalchemy.Column("model", sqlalchemy.String),
     sqlalchemy.Column("prompt", sqlalchemy.String),
@@ -93,8 +94,9 @@ async def init_db():
 
 async def log_call(model, prompt, response, prompt_tokens, completion_tokens, latency_ms,
                    is_canary=0, drift_score=None, flagged=0, probe_id=None,
-                   severity=None, probe_category=None):
+                   severity=None, probe_category=None, client_id=None):
     query = logs_table.insert().values(
+        client_id=client_id,
         model=model,
         prompt=prompt,
         response=response,
